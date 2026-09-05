@@ -80,6 +80,12 @@ The primary design listener is the project owner. Technically experienced
 peers are the secondary audience. The material should explain Nix-specific
 concepts from first principles without sacrificing architectural depth.
 
+## 2026-09-05: Form
+
+The intended result is a finite podcast series with a deliberate conclusion,
+not one long documentary or an ongoing show. The episode count and duration
+remain open.
+
 ## 2026-09-05: Repository
 
 The project record is public from the outset in smartnuf/nix-replay.
@@ -88,7 +94,6 @@ The project record is public from the outset in smartnuf/nix-replay.
 
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
-- Is the intended result one documentary, a finite series, or an ongoing show?
 - How prominently should the broader replayable-development thesis appear in
   the public framing?
 - Which practical Nix and NixOS experiments should ground the investigation?

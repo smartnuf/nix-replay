@@ -22,7 +22,7 @@ specification, series structure, and episode scripts before generating audio.
 
 ## Intended outputs
 
-- A technically rigorous podcast or finite podcast series.
+- A technically rigorous finite podcast series with a deliberate conclusion.
 - A stable companion page for every episode.
 - Transcripts, sources, links, photographs, diagrams, examples, and deeper
   technical notes.

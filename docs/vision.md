@@ -25,6 +25,15 @@ The account may assume broad engineering and computing literacy, but it should
 explain Nix-specific concepts from the ground up. Accessibility to a broad
 audience must not dilute the architectural depth or determine the pace.
 
+## Form
+
+The intended form is a finite podcast series with a deliberate conclusion.
+Each episode and its companion material may be specified and reviewed
+separately. The series is not an open-ended publishing commitment.
+
+The episode count and duration remain to be decided from the research and
+narrative needs rather than imposed in advance.
+
 ## North star
 
 Investigate how human and machine actors can replay a configurable
