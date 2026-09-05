@@ -54,6 +54,10 @@ Identify what should influence cross-platform tooling, development-process
 design, human-machine orchestration, and systems architecture. Separate
 transferable results from features peculiar to Nix.
 
+Where the evidence warrants it, formulate requirements and a conceptual
+architecture for a replayable development system. Do not implement or
+demonstrate that system within this project.
+
 ## Companion-material pattern
 
 Every approved episode should eventually have:

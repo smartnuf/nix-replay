@@ -27,6 +27,8 @@ specification, series structure, and episode scripts before generating audio.
 - Transcripts, sources, links, photographs, diagrams, examples, and deeper
   technical notes.
 - A durable record of important editorial and architectural decisions.
+- Requirements and a conceptual architecture for any missing
+  replayable-development system justified by the investigation.
 - Reproducible production materials where that is useful and lawful.
 
 ## Project record

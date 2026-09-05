@@ -92,6 +92,12 @@ The series will be presented to listeners as a series about Nix and NixOS.
 Replayable development will emerge through the investigation as a recurring
 lens and potential synthesis rather than as a predetermined conclusion.
 
+## 2026-09-05: Outcome boundary
+
+The project may formulate requirements and a conceptual architecture for the
+missing replayable-development system. A working demonstrator or implementation
+will remain outside this project and require separate scope and authority.
+
 ## 2026-09-05: Repository
 
 The project record is public from the outset in smartnuf/nix-replay.
@@ -101,8 +107,6 @@ The project record is public from the outset in smartnuf/nix-replay.
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
 - Which practical Nix and NixOS experiments should ground the investigation?
-- Should the project culminate in a proposed architecture or prototype for the
-  missing higher-level development-process system?
 - What tone, voices, episode length, and listening situation should guide the
   production?
 - Which podcast and companion-publication channels should eventually be used?

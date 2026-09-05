@@ -44,6 +44,16 @@ The public framing must not imply that the larger thesis has been established
 before historical research, technical explanation, and practical investigation
 have tested it.
 
+## Outcome boundary
+
+Where justified by the evidence, the series should culminate in requirements
+and a conceptual architecture for a replayable human-machine development
+system.
+
+Implementing that system or producing a working demonstrator is outside this
+project. Either would require a separately scoped and authorised follow-on
+project.
+
 ## North star
 
 Investigate how human and machine actors can replay a configurable
