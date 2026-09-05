@@ -8,6 +8,10 @@ The likely narrative begins with concrete systems problems, reconstructs the
 history and architecture of Nix, tests those ideas in practice, and then asks
 what they imply for a broader replayable development process.
 
+The public subject is Nix and NixOS. Replayable development is a recurring lens
+whose importance should be earned by the investigation rather than asserted in
+advance.
+
 ## Possible parts
 
 ### 1. Origins and people

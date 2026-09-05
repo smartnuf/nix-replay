@@ -86,6 +86,12 @@ The intended result is a finite podcast series with a deliberate conclusion,
 not one long documentary or an ongoing show. The episode count and duration
 remain open.
 
+## 2026-09-05: Public framing
+
+The series will be presented to listeners as a series about Nix and NixOS.
+Replayable development will emerge through the investigation as a recurring
+lens and potential synthesis rather than as a predetermined conclusion.
+
 ## 2026-09-05: Repository
 
 The project record is public from the outset in smartnuf/nix-replay.
@@ -94,8 +100,6 @@ The project record is public from the outset in smartnuf/nix-replay.
 
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
-- How prominently should the broader replayable-development thesis appear in
-  the public framing?
 - Which practical Nix and NixOS experiments should ground the investigation?
 - Should the project culminate in a proposed architecture or prototype for the
   missing higher-level development-process system?

@@ -34,6 +34,16 @@ separately. The series is not an open-ended publishing commitment.
 The episode count and duration remain to be decided from the research and
 narrative needs rather than imposed in advance.
 
+## Public framing
+
+The series will present Nix and NixOS as its concrete subject. Replayable
+development will be a recurring investigative lens and may become the earned
+synthesis of the series.
+
+The public framing must not imply that the larger thesis has been established
+before historical research, technical explanation, and practical investigation
+have tested it.
+
 ## North star
 
 Investigate how human and machine actors can replay a configurable
