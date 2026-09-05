@@ -7,19 +7,23 @@ researched.
 
 ## 2003: construction and deployment are connected
 
-The official Nix research index lists Eelco Dolstra's paper *Integrating
-Software Construction and Software Deployment*. It describes a precursor
-problem: integrating build and deployment while preserving variability rather
-than fixing one package variant. This is an antecedent, not evidence that the
-current Nix architecture was already complete. [S0004]
+The official Nix research index reports that Eelco Dolstra's paper
+*Integrating Software Construction and Software Deployment* joins building and
+deployment in one formalism while preserving the creation and deployment of
+variants. [C0009]
+
+We provisionally treat this work as an antecedent to the later Nix deployment
+model. That inference neither dates the beginning of Nix work nor implies that
+the current architecture was already present. [H0004]
 
 ## 2004: the deployment mechanism is presented
 
 Dolstra, Merijn de Jonge, and Eelco Visser presented *Nix: A Safe and
 Policy-Free System for Software Deployment* at LISA '04. The paper identifies
-distinct store paths computed from build inputs as the central mechanism from
-which side-by-side variants, environments, atomic selection changes, and safe
-garbage collection follow. [S0001]
+distinct store paths computed from build inputs as the mechanism that permits
+side-by-side variants. It separately describes user environments as store
+objects, upgrade and rollback as switching environments, and garbage
+collection in terms of roots and dependency reachability. [C0001, C0011]
 
 The project index also records *Imposing a Memory Management Discipline on
 Software Deployment* in 2004. Its analogy between store references and memory
@@ -36,10 +40,10 @@ and build management. [S0002]
 
 ## 2007: the model reaches system configuration
 
-The official index lists *Purely Functional System Configuration Management*
-by Dolstra and Armijn Hemel. It frames static packages, configuration files,
-and control scripts as results of pure functions and reports a small but
-realistic NixOS implementation. [S0004]
+Dolstra and Armijn Hemel's *Purely Functional System Configuration Management*
+presents static packages, configuration files, and control scripts as
+immutable results of pure functions. The authors report implementing the model
+in a small but realistic distribution called NixOS. [C0010]
 
 ## 2008: NixOS and build-farm accounts mature
 

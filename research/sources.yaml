@@ -122,3 +122,20 @@ sources:
     scope: Current project-level attribution and preferred thesis reference.
     rights_status: repository-licence-lgpl-2.1
     notes: Project credit is collective; it is not a contribution ranking.
+
+  - id: S0008
+    title: Purely Functional System Configuration Management
+    creators:
+      - Eelco Dolstra
+      - Armijn Hemel
+    published: 2007
+    kind: conference-paper
+    publisher: "11th Workshop on Hot Topics in Operating Systems"
+    url: https://nixos.org/~eelco/pubs/hotos-final.pdf
+    version: final-paper
+    accessed: 2026-09-05
+    source_class: contemporary-primary
+    authority: Original system-configuration paper by its named authors.
+    scope: Early NixOS model, mechanisms, evaluation, and acknowledged limits.
+    rights_status: not-assessed-for-republication
+    notes: Historical claims describe the 2007 implementation.

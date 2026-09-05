@@ -181,6 +181,68 @@ claims:
     relevance: Prevents the people story from collapsing into a lone-founder story.
     reviewed: 2026-09-05
 
+  - id: C0009
+    statement: >-
+      The official Nix research index describes the 2003 paper Integrating
+      Software Construction and Software Deployment as integrating building
+      and deployment in one formalism while preserving the creation and
+      deployment of variants through a simple functional build language.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: NixOS Research and Scientific Publications index
+    scope: The abstract and publication data recorded in the official index.
+    evidence:
+      - source: S0004
+        locator: "2003 publication entry and abstract"
+        relation: supports
+    caveats:
+      - This does not by itself establish its influence on Nix or the date at
+        which later Nix mechanisms were conceived.
+    relevance: Establishes the documented precursor problem without backdating Nix.
+    reviewed: 2026-09-05
+
+  - id: C0010
+    statement: >-
+      The 2007 paper presents static packages, configuration files, and control
+      scripts as immutable results of pure functions, and reports implementing
+      this model in a small but realistic distribution called NixOS.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: Purely Functional System Configuration Management (2007)
+    scope: The model and implementation described by the 2007 paper.
+    evidence:
+      - source: S0008
+        locator: "page 1, abstract; pages 1-2, introduction"
+        relation: supports
+    caveats:
+      - This reports the authors' description of the 2007 implementation and
+        does not establish present behaviour.
+    relevance: Marks the documented transition from deployment to NixOS.
+    reviewed: 2026-09-05
+
+  - id: C0011
+    statement: >-
+      The 2004 paper describes a user environment as a store object containing
+      links to a selected set of components, upgrade and rollback as switching
+      environments, and garbage collection as removing components unreachable
+      from retained user-environment roots using the dependency graph.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: "Nix: A Safe and Policy-Free System for Software Deployment"
+    scope: User environments and garbage collection in the 2004 system.
+    evidence:
+      - source: S0001
+        locator: "pages 4-5, User Environments"
+        relation: supports
+    caveats:
+      - These are separate cooperating mechanisms, not consequences of hashed
+        store paths alone.
+    relevance: Gives the causal account for selection, rollback, and collection.
+    reviewed: 2026-09-05
+
   - id: H0001
     statement: >-
       Nix supplies a strong realisation and selection substrate for a
@@ -244,4 +306,22 @@ claims:
       - Needs vocabulary tests, worked examples, and comparison with adjacent tools.
       - Replay must not be presented as synonymous with exact reproduction or tracing.
     relevance: Central proposition to investigate after the Nix foundation is sound.
+    reviewed: 2026-09-05
+
+  - id: H0004
+    statement: >-
+      The 2003 construction-and-deployment work is an antecedent to the later
+      Nix deployment model.
+    kind: inference
+    status: provisional
+    confidence: low
+    scope: Relationship inferred from the official historical index.
+    evidence:
+      - source: S0004
+        locator: "2003 publication entry and its placement in the Nix index"
+        relation: motivates
+    caveats:
+      - This does not establish a direct line of influence, when Nix work began,
+        or that the current Nix architecture was present in 2003.
+    relevance: A question for the deeper origins and people investigation.
     reviewed: 2026-09-05
