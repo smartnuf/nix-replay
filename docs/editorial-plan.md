@@ -58,6 +58,12 @@ Where the evidence warrants it, formulate requirements and a conceptual
 architecture for a replayable development system. Do not implement or
 demonstrate that system within this project.
 
+## Duration
+
+Aim for 35 to 50 minutes per episode. Prefer a shorter complete episode over
+padding, and split material rather than routinely exceeding one hour. Final
+duration follows the coherent narrative unit.
+
 ## Voice pattern
 
 Use one principal narrator to maintain continuity, precision, and the authored

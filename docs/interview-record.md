@@ -92,6 +92,12 @@ The series will be presented to listeners as a series about Nix and NixOS.
 Replayable development will emerge through the investigation as a recurring
 lens and potential synthesis rather than as a predetermined conclusion.
 
+## 2026-09-05: Duration
+
+Episodes should normally run for 35 to 50 minutes. Narrative coherence takes
+precedence over hitting a target: shorter complete episodes should not be
+padded, and material should be split rather than routinely exceeding one hour.
+
 ## 2026-09-05: Tone
 
 The agreed tone is an investigative technical documentary: intellectually
@@ -125,8 +131,5 @@ The project record is public from the outset in smartnuf/nix-replay.
 
 ## Open interview questions
 
-- What detailed prior knowledge may be assumed beyond general technical
-  literacy?
 - Which practical Nix and NixOS experiments should ground the investigation?
-- What approximate episode duration should guide the production?
 - Which podcast and companion-publication channels should eventually be used?

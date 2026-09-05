@@ -31,8 +31,10 @@ The intended form is a finite podcast series with a deliberate conclusion.
 Each episode and its companion material may be specified and reviewed
 separately. The series is not an open-ended publishing commitment.
 
-The episode count and duration remain to be decided from the research and
-narrative needs rather than imposed in advance.
+The episode count will follow the research and narrative needs rather than be
+imposed in advance. Episodes should normally run for 35 to 50 minutes. Narrative
+coherence takes precedence: do not pad a complete shorter episode, and split
+material rather than routinely exceeding one hour.
 
 The presentation will use a hybrid voice structure. One principal narrator
 will provide continuity, precision, and the authored argument. A second voice
