@@ -13,7 +13,7 @@ sources:
     url: https://edolstra.github.io/pubs/nspfssd-lisa2004-final.pdf
     version: final-paper
     accessed: 2026-09-05
-    primary: true
+    source_class: contemporary-primary
     authority: Original Nix research paper by its named authors.
     scope: Early design, motivation, store identity, environments, and rollback.
     rights_status: not-assessed-for-republication
@@ -29,7 +29,7 @@ sources:
     url: https://research-portal.uu.nl/en/publications/the-purely-functional-software-deployment-model/
     version: published-thesis-record
     accessed: 2026-09-05
-    primary: true
+    source_class: institutional-record
     authority: University publication record for the originating thesis.
     scope: Thesis chronology, authorship, and stated deployment model.
     rights_status: not-assessed-for-republication
@@ -46,7 +46,7 @@ sources:
     url: https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf
     version: final-paper
     accessed: 2026-09-05
-    primary: true
+    source_class: contemporary-primary
     authority: Original NixOS research paper by its named authors.
     scope: NixOS design, derivations, declarative system construction, and limits.
     rights_status: not-assessed-for-republication
@@ -62,7 +62,7 @@ sources:
     url: https://nixos.org/research/
     version: accessed-snapshot
     accessed: 2026-09-05
-    primary: true
+    source_class: institutional-record
     authority: Official project index of research publications and abstracts.
     scope: Publication chronology, credited authors, and links to original work.
     rights_status: not-assessed-for-republication
@@ -78,7 +78,7 @@ sources:
     url: https://nix.dev/manual/nix/2.35/
     version: 2.35.2
     accessed: 2026-09-05
-    primary: true
+    source_class: contemporary-primary
     authority: Versioned official reference manual for Nix.
     scope: Current store objects, references, profiles, and command semantics.
     rights_status: not-assessed-for-republication
@@ -94,7 +94,7 @@ sources:
     url: https://nixos.org/manual/nixos/stable/
     version: "26.05"
     accessed: 2026-09-05
-    primary: true
+    source_class: contemporary-primary
     authority: Official manual for the named NixOS release.
     scope: Modules, system realisation, activation, generations, and rollback.
     rights_status: not-assessed-for-republication
@@ -111,7 +111,7 @@ sources:
     url: https://github.com/NixOS/nix/blob/2.35.2/CITATION.cff
     version: 2.35.2
     accessed: 2026-09-05
-    primary: true
+    source_class: contemporary-primary
     authority: Citation metadata shipped in the official Nix repository.
     scope: Current project-level attribution and preferred thesis reference.
     rights_status: repository-licence-lgpl-2.1

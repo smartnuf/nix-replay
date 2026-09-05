@@ -8,6 +8,7 @@ claims:
       cryptographic hashes of build inputs.
     kind: fact
     status: supported
+    confidence: high
     scope: Publication and design history established by the 2004 paper.
     evidence:
       - source: S0001
@@ -30,6 +31,7 @@ claims:
       described its implementation in Nix.
     kind: fact
     status: supported
+    confidence: high
     scope: Publication history and the thesis's stated subject.
     evidence:
       - source: S0002
@@ -49,6 +51,7 @@ claims:
       declarative specification.
     kind: fact
     status: supported
+    confidence: high
     scope: Contribution claimed and described by the 2008 paper.
     evidence:
       - source: S0003
@@ -67,8 +70,10 @@ claims:
       In the model documented by the 2008 paper, Nix expressions describe a
       graph of derivations; each derivation specifies a builder, environment,
       and dependencies, and dependencies are built before the builder runs.
-    kind: fact
+    kind: report
     status: supported
+    confidence: high
+    attributed_to: "NixOS: A Purely Functional Linux Distribution (2008)"
     scope: Conceptual model in the 2008 paper.
     evidence:
       - source: S0003
@@ -85,8 +90,10 @@ claims:
       In Nix 2.35, store objects contain filesystem data and references to
       other store objects, are immutable after creation, and must be present
       with everything they reference.
-    kind: fact
+    kind: report
     status: supported
+    confidence: high
+    attributed_to: Nix 2.35.2 Reference Manual
     scope: Nix 2.35 store model.
     evidence:
       - source: S0005
@@ -103,8 +110,10 @@ claims:
       Nix package upgrades can be atomic at the selected profile boundary
       because packages in the store are not overwritten; a selection changes
       to refer to a different set of store objects.
-    kind: fact
+    kind: report
     status: supported
+    confidence: medium
+    attributed_to: Nix 2.35.2 Reference Manual
     scope: Package profiles described by Nix 2.35.
     evidence:
       - source: S0005
@@ -124,8 +133,10 @@ claims:
       NixOS 26.05 combines modules into a full declarative configuration, builds
       a new configuration before switching, and retains earlier system
       generations until they are garbage-collected.
-    kind: fact
+    kind: report
     status: supported
+    confidence: medium
+    attributed_to: NixOS 26.05 Manual
     scope: NixOS 26.05 module, rebuild, and rollback interfaces.
     evidence:
       - source: S0006
@@ -153,6 +164,7 @@ claims:
       2010 journal version.
     kind: fact
     status: supported
+    confidence: high
     scope: Authorship of the named publications, not total project contribution.
     evidence:
       - source: S0001
@@ -176,6 +188,7 @@ claims:
       evolving intent, decisions, assessment, and steering loop of that process.
     kind: hypothesis
     status: open
+    confidence: low
     scope: Relationship between core Nix/NixOS and the proposed process model.
     evidence:
       - source: S0003
@@ -200,6 +213,7 @@ claims:
       mutable runtime state, external services, and observation of outcomes.
     kind: inference
     status: provisional
+    confidence: medium
     scope: Boundary analysis of the documented Nix and NixOS models.
     evidence:
       - source: S0003
@@ -223,6 +237,7 @@ claims:
       enough for later inspection and increasingly controlled realisation.
     kind: hypothesis
     status: open
+    confidence: low
     scope: Proposed series model; not a claim about existing Nix behaviour.
     evidence: []
     caveats:

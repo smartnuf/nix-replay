@@ -10,6 +10,7 @@ have the same epistemic status.
 - `S####` identifies a source.
 - `C####` identifies a factual or reported claim.
 - `H####` identifies an inference or hypothesis to test.
+- `J####` identifies a project judgement or recommendation.
 
 Identifiers are stable. Retire a record rather than reusing its identifier.
 
@@ -26,7 +27,7 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
 - `url`: direct or canonical location.
 - `version`: release, edition, or `not-versioned`.
 - `accessed`: date last checked.
-- `primary`: whether the source is primary for the claims we take from it.
+- `source_class`: one of the six classes approved in the research plan.
 - `authority`: why it is competent for those claims.
 - `scope`: what we may use it to establish.
 - `rights_status`: status for reuse in companion material. This is separate
@@ -39,19 +40,52 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
 
 - `id`: stable claim or hypothesis identifier.
 - `statement`: one proposition that could be checked or challenged.
-- `kind`: `fact`, `reported`, `inference`, `hypothesis`, or `judgement`.
+- `kind`: `fact`, `report`, `inference`, `hypothesis`, or `judgement`.
 - `status`: `supported`, `provisional`, `open`, `contested`, or `retired`.
+- `confidence`: `high`, `medium`, or `low` evidential confidence.
 - `scope`: boundary within which the statement is intended to hold.
+- `attributed_to`: required for a `report`; omitted for other kinds.
 - `evidence`: source IDs, locators, and the relation to the statement.
 - `caveats`: material limits that must travel with the statement.
 - `relevance`: likely use in the series; not a commitment to an episode.
 - `reviewed`: date last reviewed.
 
-`fact` is reserved for directly checkable matters such as authorship or a
-documented interface. `reported` means a primary source makes the technical
-claim, but our research has not independently reproduced it. `inference` and
-`hypothesis` make our interpretation explicit. `judgement` is an editorial
-assessment.
+### Source classes
+
+The machine-readable values preserve the six ordered classes in D1:
+
+1. `contemporary-primary`
+2. `first-person-account`
+3. `institutional-record`
+4. `independent-analysis`
+5. `community-report`
+6. `project-experiment-or-synthesis`
+
+The order is a preference when sources address the same factual question,
+not an automatic ranking detached from a claim's date, scope, or provenance.
+
+### Mutually exclusive claim kinds
+
+`fact` means the project adopts the proposition as directly supported by
+adequate evidence. Independent reproduction is required when the proposition
+itself depends on observed behaviour, but not for a documentary fact such as
+a byline or specified interface.
+
+`report` means that a named person or source asserts the proposition and the
+project records the attribution without adopting the underlying proposition
+as fact. A report must set `attributed_to`. If we later adopt the proposition,
+we retire or supersede the report with a distinct fact record.
+
+`inference` is a conclusion explicitly drawn from stated evidence.
+`hypothesis` is a proposition retained for investigation. `judgement` is the
+project's reasoned evaluation or recommendation.
+
+Confidence is distinct from status: status records the claim's disposition,
+whereas confidence records evidential strength. `high` requires adequate,
+direct, and well-scoped support; `medium` records material support with a
+remaining test or qualification; `low` marks an early or weakly supported
+proposition. For a report, confidence concerns the accuracy of the attribution,
+not the unadopted proposition it contains.
 
 ## Working rules
 
