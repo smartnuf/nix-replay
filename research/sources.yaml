@@ -96,7 +96,7 @@ sources:
     accessed: 2026-09-05
     primary: true
     authority: Official manual for the named NixOS release.
-    scope: Modules, system realization, activation, generations, and rollback.
+    scope: Modules, system realisation, activation, generations, and rollback.
     rights_status: not-assessed-for-republication
     notes: The stable URL moves; the recorded release is part of the citation.
 
@@ -114,5 +114,5 @@ sources:
     primary: true
     authority: Citation metadata shipped in the official Nix repository.
     scope: Current project-level attribution and preferred thesis reference.
-    rights_status: repository-license-lgpl-2.1
+    rights_status: repository-licence-lgpl-2.1
     notes: Project credit is collective; it is not a contribution ranking.

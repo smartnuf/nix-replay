@@ -9,8 +9,8 @@ claim that Nix is a complete development-process system.
 | --- | --- | --- | --- |
 | Nix evaluation | Nix expressions and supplied inputs | Computes values and derivation graphs | Source selection, evaluator inputs, impure evaluation, and author intent |
 | Derivation | Builder, environment, declared dependencies, outputs | Describes a build action and its dependency graph | Undeclared dependencies, builder behaviour, platform effects, and permitted nondeterminism |
-| Build realization | Build execution and produced output | Attempts to realize the derivation in a controlled environment | Kernel, hardware, remote builders, sandbox policy, clocks, entropy, and defects |
-| Store | Immutable store objects and references | Preserves realized objects and their reference graph | Which objects a particular store currently contains |
+| Build realisation | Build execution and produced output | Attempts to realise the derivation in a controlled environment | Kernel, hardware, remote builders, sandbox policy, clocks, entropy, and defects |
+| Store | Immutable store objects and references | Preserves realised objects and their reference graph | Which objects a particular store currently contains |
 | Profile or generation | A selected environment or system closure | Makes one selection current without overwriting store objects | Mutable user data and external services |
 | NixOS modules | Option declarations and definitions combined into a configuration | Composes a full declarative system configuration | Whether declarations capture every operational requirement |
 | Activation and runtime | Switch program, services, and running state | Attempts to move the running machine to the selected configuration | Effectful transitions, persistent data, live traffic, failures, and observation |
@@ -21,10 +21,10 @@ store object, selected closure, static configuration, or running service.
 
 ## Four distinctions the series must preserve
 
-### Description is not realization
+### Description is not realisation
 
 A Nix expression can compute a derivation graph; a derivation can describe a
-build; a build can realize an object. Conflating these steps hides both the
+build; a build can realise an object. Conflating these steps hides both the
 power of the model and the remaining sources of variation. [C0004]
 
 ### Identity is not automatically bit-for-bit equality
@@ -54,7 +54,7 @@ The working hypothesis is that Nix and NixOS supply several unusually strong
 pieces:
 
 - explicit dependency graphs;
-- immutable realized objects;
+- immutable realised objects;
 - sharing and closure operations;
 - declarative composition of static system configuration;
 - selectable generations and bounded rollback; and
@@ -75,7 +75,7 @@ bundle that identifies:
 2. the process definition and tools to invoke;
 3. selected inputs and allowable degrees of freedom;
 4. decisions and authority boundaries;
-5. realized artifacts and observations; and
+5. realised artefacts and observations; and
 6. unresolved questions that a later replay may steer differently.
 
 This candidate model is a hypothesis for later examples and experiments, not

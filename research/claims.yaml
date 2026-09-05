@@ -95,7 +95,7 @@ claims:
     caveats:
       - The set of objects present in a store can change over time.
       - Store-path identity and content identity are not interchangeable terms.
-    relevance: Establishes the durable graph on which sharing and realization rely.
+    relevance: Establishes the durable graph on which sharing and realisation rely.
     reviewed: 2026-09-05
 
   - id: C0006
@@ -138,11 +138,11 @@ claims:
         locator: "Rolling Back Configuration Changes"
         relation: supports
     caveats:
-      - Switching attempts to realize the configuration in a running system;
+      - Switching attempts to realise the configuration in a running system;
         activation has effects and is not merely evaluation.
       - Earlier generations do not restore application databases or other
         mutable state unless separately managed.
-    relevance: Shows composition, realization, checkpoint selection, and limits.
+    relevance: Shows composition, realisation, checkpoint selection, and limits.
     reviewed: 2026-09-05
 
   - id: C0008
@@ -171,7 +171,7 @@ claims:
 
   - id: H0001
     statement: >-
-      Nix supplies a strong realization and selection substrate for a
+      Nix supplies a strong realisation and selection substrate for a
       replayable development process, but does not by itself represent the
       evolving intent, decisions, assessment, and steering loop of that process.
     kind: hypothesis
@@ -220,7 +220,7 @@ claims:
     statement: >-
       A replayable process can permit bounded choice or randomness upstream
       while requiring selected decisions, inputs, and outputs to become durable
-      enough for later inspection and increasingly controlled realization.
+      enough for later inspection and increasingly controlled realisation.
     kind: hypothesis
     status: open
     scope: Proposed series model; not a claim about existing Nix behaviour.

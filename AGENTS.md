@@ -32,6 +32,8 @@ until the applicable review and authority boundary is explicitly satisfied.
   relevant Nix and surrounding ecosystem have been examined.
 - Do not use external photographs, audio, or artwork without recording origin,
   licence, attribution, and intended use.
+- Use English forms where English and American usage differ, including in
+  prose, metadata, commit messages, and pull-request descriptions.
 - Keep prose and Markdown lines at no more than 79 characters where practical.
 - Keep changes focused and expose consequential choices rather than making
   silent product or editorial decisions.
