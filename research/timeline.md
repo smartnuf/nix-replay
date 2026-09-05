@@ -25,18 +25,21 @@ side-by-side variants. It separately describes user environments as store
 objects, upgrade and rollback as switching environments, and garbage
 collection in terms of roots and dependency reachability. [C0001, C0011]
 
-The project index also records *Imposing a Memory Management Discipline on
-Software Deployment* in 2004. Its analogy between store references and memory
-graphs supplies a useful second route into closures and garbage collection.
-[S0004]
+The 2004 paper *Imposing a Memory Management Discipline on Software
+Deployment* compares deployment hazards with pointer hazards and develops
+file-system closures and a memory-management discipline for dependency
+handling and safe collection. [C0014]
+
+The project provisionally treats that analogy as a useful second explanatory
+route into closures and garbage collection. Its pedagogical value still needs
+testing. [H0006]
 
 ## 2006: the deployment model is consolidated
 
 Utrecht University records publication of Eelco Dolstra's doctoral thesis,
 *The Purely Functional Software Deployment Model*, on 18 January 2006. The
-thesis presents the model, its Nix implementation, and applications beyond
-package installation, including continuous integration, service deployment,
-and build management. [S0002]
+thesis develops the purely functional deployment model and describes its
+implementation in Nix. [C0002]
 
 ## 2007: the model reaches system configuration
 
@@ -47,10 +50,9 @@ in a small but realistic distribution called NixOS. [C0010]
 
 ## 2008: NixOS and build-farm accounts mature
 
-Dolstra and Andres Löh's ICFP paper presents NixOS as a Linux distribution
-constructed and updated from declarative specification. It explicitly extends
-the model from packages to static system configuration and examines how pure
-actual builds were in practice. [S0003]
+Dolstra and Andres Löh's ICFP paper applies the functional deployment model
+beyond packages to static operating-system configuration built from a
+declarative specification. [C0003]
 
 The same year's Nix Build Farm paper, credited to Dolstra and Visser, reports
 using Nix descriptions to produce build environments automatically and
@@ -65,8 +67,7 @@ replay model. [H0005]
 
 The project index records a Journal of Functional Programming version of
 *NixOS: A Purely Functional Linux Distribution* by Dolstra, Löh, and Nicolas
-Pierron. Its abstract describes static system parts as immutable values built
-by pure functions and NixOS as a modular functional specification. [S0004]
+Pierron. [C0008]
 
 ## Present reference point: Nix 2.35 and NixOS 26.05
 

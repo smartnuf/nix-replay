@@ -41,7 +41,7 @@ claims:
         locator: "references entry"
         relation: supports
     caveats: []
-    relevance: The research lineage and the person most centrally credited.
+    relevance: The research lineage and the thesis's account of the model.
     reviewed: 2026-09-05
 
   - id: C0003
@@ -288,6 +288,27 @@ claims:
     relevance: Supplies the current mechanism for the realisation boundary.
     reviewed: 2026-09-05
 
+  - id: C0014
+    statement: >-
+      The 2004 memory-management paper compares software-deployment hazards
+      with pointer hazards and presents file-system closures plus a
+      memory-management discipline for dependency handling and safe collection.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: >-
+      Imposing a Memory Management Discipline on Software Deployment (2004)
+    scope: Design argument and mechanisms reported in the 2004 paper.
+    evidence:
+      - source: S0010
+        locator: "pages 1 and 3-4, abstract and sections 3-5"
+        relation: supports
+    caveats:
+      - This records the authors' historical analogy and account, not current
+        Nix terminology or an independently reproduced result.
+    relevance: Records the second early explanation of closures and collection.
+    reviewed: 2026-09-05
+
   - id: H0001
     statement: >-
       Nix supplies a strong realisation and selection substrate for a
@@ -390,3 +411,20 @@ claims:
     relevance: Connects the historical account to a later question for testing.
     reviewed: 2026-09-05
 
+  - id: H0006
+    statement: >-
+      The 2004 paper's memory-management analogy provides a useful second
+      explanatory route into closures and garbage collection for this series.
+    kind: inference
+    status: provisional
+    confidence: low
+    scope: Proposed editorial interpretation of the 2004 paper.
+    evidence:
+      - source: S0010
+        locator: "pages 1 and 3-4, abstract and sections 3-5"
+        relation: motivates
+    caveats:
+      - Pedagogical usefulness remains to be tested in outline and script
+        review; the analogy is not a separate Nix mechanism.
+    relevance: Candidate historical and explanatory framing for later use.
+    reviewed: 2026-09-05
