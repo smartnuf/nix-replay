@@ -1,0 +1,118 @@
+schema_version: 1
+updated: 2026-09-05
+sources:
+  - id: S0001
+    title: "Nix: A Safe and Policy-Free System for Software Deployment"
+    creators:
+      - Eelco Dolstra
+      - Merijn de Jonge
+      - Eelco Visser
+    published: 2004
+    kind: conference-paper
+    publisher: "18th USENIX LISA conference"
+    url: https://edolstra.github.io/pubs/nspfssd-lisa2004-final.pdf
+    version: final-paper
+    accessed: 2026-09-05
+    primary: true
+    authority: Original Nix research paper by its named authors.
+    scope: Early design, motivation, store identity, environments, and rollback.
+    rights_status: not-assessed-for-republication
+    notes: Claims are historical and describe the 2004 implementation.
+
+  - id: S0002
+    title: The Purely Functional Software Deployment Model
+    creators:
+      - Eelco Dolstra
+    published: 2006-01-18
+    kind: doctoral-thesis
+    publisher: Utrecht University
+    url: https://research-portal.uu.nl/en/publications/the-purely-functional-software-deployment-model/
+    version: published-thesis-record
+    accessed: 2026-09-05
+    primary: true
+    authority: University publication record for the originating thesis.
+    scope: Thesis chronology, authorship, and stated deployment model.
+    rights_status: not-assessed-for-republication
+    notes: The record includes the abstract; use the thesis for deeper claims.
+
+  - id: S0003
+    title: "NixOS: A Purely Functional Linux Distribution"
+    creators:
+      - Eelco Dolstra
+      - Andres Löh
+    published: 2008
+    kind: conference-paper
+    publisher: "ICFP 2008"
+    url: https://edolstra.github.io/pubs/nixos-icfp2008-final.pdf
+    version: final-paper
+    accessed: 2026-09-05
+    primary: true
+    authority: Original NixOS research paper by its named authors.
+    scope: NixOS design, derivations, declarative system construction, and limits.
+    rights_status: not-assessed-for-republication
+    notes: Describes the 2008 system; current behaviour needs current manuals.
+
+  - id: S0004
+    title: Research and Scientific Publications
+    creators:
+      - NixOS Foundation
+    published: not-dated
+    kind: project-publication-index
+    publisher: NixOS Foundation
+    url: https://nixos.org/research/
+    version: accessed-snapshot
+    accessed: 2026-09-05
+    primary: true
+    authority: Official project index of research publications and abstracts.
+    scope: Publication chronology, credited authors, and links to original work.
+    rights_status: not-assessed-for-republication
+    notes: An index is not a substitute for reading cited papers.
+
+  - id: S0005
+    title: Nix Reference Manual
+    creators:
+      - Nix contributors
+    published: 2026
+    kind: reference-manual
+    publisher: Nix project
+    url: https://nix.dev/manual/nix/2.35/
+    version: 2.35.2
+    accessed: 2026-09-05
+    primary: true
+    authority: Versioned official reference manual for Nix.
+    scope: Current store objects, references, profiles, and command semantics.
+    rights_status: not-assessed-for-republication
+    notes: Use versioned subpages as claim locators.
+
+  - id: S0006
+    title: NixOS Manual
+    creators:
+      - NixOS contributors
+    published: 2026
+    kind: reference-manual
+    publisher: NixOS project
+    url: https://nixos.org/manual/nixos/stable/
+    version: "26.05"
+    accessed: 2026-09-05
+    primary: true
+    authority: Official manual for the named NixOS release.
+    scope: Modules, system realization, activation, generations, and rollback.
+    rights_status: not-assessed-for-republication
+    notes: The stable URL moves; the recorded release is part of the citation.
+
+  - id: S0007
+    title: Nix software citation metadata
+    creators:
+      - Eelco Dolstra
+      - Nix contributors
+    published: not-dated
+    kind: software-metadata
+    publisher: Nix project
+    url: https://github.com/NixOS/nix/blob/2.35.2/CITATION.cff
+    version: 2.35.2
+    accessed: 2026-09-05
+    primary: true
+    authority: Citation metadata shipped in the official Nix repository.
+    scope: Current project-level attribution and preferred thesis reference.
+    rights_status: repository-license-lgpl-2.1
+    notes: Project credit is collective; it is not a contribution ranking.
