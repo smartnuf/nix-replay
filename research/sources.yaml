@@ -60,13 +60,16 @@ sources:
     kind: project-publication-index
     publisher: NixOS Foundation
     url: https://nixos.org/research/
-    version: accessed-snapshot
+    snapshot_url: https://github.com/NixOS/nixos-homepage/blob/7432aef25a79b1ad0bf406577369581e1a12baf9/core/src/pages/research.astro
+    version: "homepage source at 7432aef25a79b1ad0bf406577369581e1a12baf9"
     accessed: 2026-09-05
     source_class: institutional-record
     authority: Official project index of research publications and abstracts.
     scope: Publication chronology, credited authors, and links to original work.
     rights_status: not-assessed-for-republication
-    notes: An index is not a substitute for reading cited papers.
+    notes: >-
+      The immutable homepage-source snapshot preserves the reviewed index. An
+      index is not a substitute for reading cited papers.
 
   - id: S0005
     title: Nix Reference Manual
