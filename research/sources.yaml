@@ -65,7 +65,9 @@ sources:
     accessed: 2026-09-05
     source_class: institutional-record
     authority: Official project index of research publications and abstracts.
-    scope: Publication chronology, credited authors, and links to original work.
+    scope: >-
+      Publication chronology, credited authors, attributed abstract summaries,
+      and links to original work.
     rights_status: not-assessed-for-republication
     notes: >-
       The immutable homepage-source snapshot preserves the reviewed index. An
@@ -79,13 +81,16 @@ sources:
     kind: reference-manual
     publisher: Nix project
     url: https://nix.dev/manual/nix/2.35/
-    version: 2.35.2
+    snapshot_url: https://github.com/NixOS/nix/tree/2c73b59da29606068c0c98db015dd3a66955525d/doc/manual/source
+    version: "2.35.2 at Nix 2c73b59da29606068c0c98db015dd3a66955525d"
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Versioned official reference manual for Nix.
     scope: Current store objects, references, profiles, and command semantics.
     rights_status: not-assessed-for-republication
-    notes: Use versioned subpages as claim locators.
+    notes: >-
+      The series URL can move within Nix 2.35. snapshot_url preserves the exact
+      2.35.2 manual source reviewed; locators name sections in rendered form.
 
   - id: S0006
     title: NixOS Manual
@@ -139,3 +144,22 @@ sources:
     scope: Early NixOS model, mechanisms, evaluation, and acknowledged limits.
     rights_status: not-assessed-for-republication
     notes: Historical claims describe the 2007 implementation.
+
+  - id: S0009
+    title: "The Nix Build Farm: A Declarative Approach to Continuous Integration"
+    creators:
+      - Eelco Dolstra
+      - Eelco Visser
+    published: 2008
+    kind: conference-paper
+    publisher: >-
+      International Workshop on Advanced Software Development Tools and
+      Techniques
+    url: https://nixos.org/~eelco/pubs/buildfarm-wasdett2008-final.pdf
+    version: final-paper
+    accessed: 2026-09-05
+    source_class: contemporary-primary
+    authority: Original Nix build-farm paper by its named authors.
+    scope: Build-environment management, variability, and continuous integration.
+    rights_status: not-assessed-for-republication
+    notes: Historical claims describe the 2008 build-farm implementation.
