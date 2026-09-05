@@ -74,13 +74,20 @@ into the product descriptions and process definitions.
 A useful characterisation is a directed hybrid human-machine learning system
 for developing software and systems.
 
+## 2026-09-05: Audience
+
+The primary design listener is the project owner. Technically experienced
+peers are the secondary audience. The material should explain Nix-specific
+concepts from first principles without sacrificing architectural depth.
+
 ## 2026-09-05: Repository
 
 The project record is public from the outset in smartnuf/nix-replay.
 
 ## Open interview questions
 
-- Who is the primary listener, and what prior knowledge may be assumed?
+- What detailed prior knowledge may be assumed beyond general technical
+  literacy?
 - Is the intended result one documentary, a finite series, or an ongoing show?
 - How prominently should the broader replayable-development thesis appear in
   the public framing?

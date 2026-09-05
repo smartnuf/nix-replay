@@ -15,6 +15,16 @@ The project has three purposes, in priority order:
 2. Evaluate practically whether and where Nix or NixOS should be adopted.
 3. Develop enough guided understanding to use and judge them competently.
 
+## Audience
+
+The primary design listener is the project owner: a technically experienced
+person investigating Nix and NixOS from first principles. Technically
+experienced peers are the secondary audience.
+
+The account may assume broad engineering and computing literacy, but it should
+explain Nix-specific concepts from the ground up. Accessibility to a broad
+audience must not dilute the architectural depth or determine the pace.
+
 ## North star
 
 Investigate how human and machine actors can replay a configurable
