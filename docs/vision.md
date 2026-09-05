@@ -1,6 +1,6 @@
 # Project vision
 
-Status: working draft for review
+Status: approved at discovery gate D0 on 2026-09-05
 
 ## Purpose
 

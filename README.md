@@ -15,10 +15,11 @@ systems development more generally.
 
 ## Current status
 
-**Discovery. No podcast script, audio, or publication has been approved.**
+**Research design (D1). The project vision was approved on 2026-09-05.**
 
-The project will establish and review its intent, evidence base, editorial
-specification, series structure, and episode scripts before generating audio.
+No podcast script, audio, or publication has been approved. The research plan,
+evidence base, series specification, and episode scripts must pass their
+respective review gates before generation.
 
 ## Intended outputs
 

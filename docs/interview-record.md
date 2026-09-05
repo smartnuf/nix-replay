@@ -129,7 +129,13 @@ will remain outside this project and require separate scope and authority.
 
 The project record is public from the outset in smartnuf/nix-replay.
 
-## Open interview questions
+## 2026-09-05: Discovery approval
+
+The owner explicitly approved the project vision. Discovery gate D0 is
+complete, and the project may proceed to research design D1. This approval does
+not authorise scripting, audio generation, or publication.
+
+## Questions deferred beyond discovery
 
 - Which practical Nix and NixOS experiments should ground the investigation?
 - Which podcast and companion-publication channels should eventually be used?

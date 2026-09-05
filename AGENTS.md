@@ -10,11 +10,14 @@ direction.
 
 ## Current authority
 
-The project is in intent discovery.
+Discovery gate D0 is approved. The project is in research design D1.
 
-Do not generate podcast scripts, audio, feeds, releases, or public distribution
-material until the applicable review gate in docs/process.md is explicitly
-approved.
+Work may specify research questions, source strategy, historical method,
+practical experiments, claim taxonomy, and treatment of disputed matters.
+
+Do not begin the evidence dossier, generate podcast scripts or audio, create
+feeds or releases, or distribute material until the applicable review gate in
+docs/process.md is explicitly approved.
 
 ## Working rules
 
