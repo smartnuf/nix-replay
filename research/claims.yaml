@@ -243,6 +243,27 @@ claims:
     relevance: Gives the causal account for selection, rollback, and collection.
     reviewed: 2026-09-05
 
+  - id: C0012
+    statement: >-
+      The 2008 Nix Build Farm paper describes a continuous-integration tool
+      built on Nix whose functional build descriptions produce build
+      environments automatically and deterministically and express build
+      variants.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: "The Nix Build Farm (2008)"
+    scope: Build-farm design and use reported in the 2008 paper.
+    evidence:
+      - source: S0009
+        locator: "page 1, abstract; pages 2-3, introduction and build-farm model"
+        relation: supports
+    caveats:
+      - This reports the authors' account of the 2008 implementation and does
+        not establish current behaviour or a complete development process.
+    relevance: Documents an early use of Nix in development-process automation.
+    reviewed: 2026-09-05
+
   - id: H0001
     statement: >-
       Nix supplies a strong realisation and selection substrate for a
@@ -324,4 +345,23 @@ claims:
       - This does not establish a direct line of influence, when Nix work began,
         or that the current Nix architecture was present in 2003.
     relevance: A question for the deeper origins and people investigation.
+    reviewed: 2026-09-05
+
+  - id: H0005
+    statement: >-
+      The 2008 Nix Build Farm work is an early documented bridge from Nix's
+      deployment model to development-process automation relevant to the
+      proposed replay model.
+    kind: inference
+    status: provisional
+    confidence: low
+    scope: Project interpretation of the 2008 build-farm paper.
+    evidence:
+      - source: S0009
+        locator: "pages 1-3, motivation and build-farm model"
+        relation: motivates
+    caveats:
+      - The paper does not describe the full replay model proposed by this
+        project or establish the capabilities of current systems.
+    relevance: Connects the historical account to a later question for testing.
     reviewed: 2026-09-05

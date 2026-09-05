@@ -52,11 +52,14 @@ constructed and updated from declarative specification. It explicitly extends
 the model from packages to static system configuration and examines how pure
 actual builds were in practice. [S0003]
 
-The same year's Nix Build Farm paper, credited to Dolstra and Visser, applies
-Nix descriptions to reproducible build environments for continuous
-integration. This is an early bridge to the series' broader concern with
-development processes, but it is not yet evidence for the full replay model.
-[S0004]
+The same year's Nix Build Farm paper, credited to Dolstra and Visser, reports
+using Nix descriptions to produce build environments automatically and
+deterministically while expressing build variants for continuous integration.
+[C0012]
+
+The project provisionally interprets this as an early bridge to the series'
+broader concern with development processes. It is not evidence for the full
+replay model. [H0005]
 
 ## 2010: the NixOS account reaches journal form
 
