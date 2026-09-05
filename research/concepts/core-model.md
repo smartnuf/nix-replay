@@ -9,15 +9,16 @@ claim that Nix is a complete development-process system.
 | --- | --- | --- | --- |
 | Nix evaluation (2008 account) | Nix expressions and supplied inputs | Computes values and derivation graphs | Source selection, evaluator inputs, impure evaluation, and author intent |
 | Derivation (2008 account) | Builder, environment, declared dependencies, outputs | Describes a build action and its dependency graph | Undeclared dependencies, builder behaviour, platform effects, and permitted nondeterminism |
-| Build realisation | Realised store object | Runs a builder or accepts a substitute to obtain the requested output | Undeclared inputs, platform effects, sandbox policy, clocks, entropy, trust, and defects |
+| Build realisation | Realised store object | Ensures a store path is valid through a local or remote build, or a substituter | Builder behaviour, permitted external inputs, sandbox configuration, remote execution, and substituter trust |
 | Store | Immutable store objects and references | Preserves realised objects and their reference graph | Which objects a particular store currently contains |
 | Profile or generation | A selected environment or system closure | Makes one selection current without overwriting store objects | Mutable user data and external services |
 | NixOS modules | Option declarations and definitions combined into a configuration | Composes a full declarative system configuration | Whether declarations capture every operational requirement |
 | Activation and runtime | Selected system configuration and activation scripts | Attempts to move the running machine to the selected configuration | Running state, effectful transitions, persistent data, live traffic, failures, and observation |
 
 The two historical rows report the 2008 model in C0004. The remaining
-mechanism rows use the versioned current accounts in C0005-C0007. Each row
-deliberately names a boundary where the word "reproducible" needs a subject:
+mechanism rows use the versioned current accounts in C0005-C0007 and C0013.
+Each row deliberately names a boundary where the word "reproducible" needs a
+subject:
 description, derivation, build output, store object, selected closure, static
 configuration, or running service.
 

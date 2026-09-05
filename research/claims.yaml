@@ -264,6 +264,30 @@ claims:
     relevance: Documents an early use of Nix in development-process automation.
     reviewed: 2026-09-05
 
+  - id: C0013
+    statement: >-
+      In Nix 2.35.2, realising a store path means ensuring that it is valid by
+      fetching a pre-built store object from a substituter, building the
+      corresponding derivation, or delegating the build to a remote machine
+      and retrieving its outputs.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: Nix 2.35.2 Reference Manual
+    scope: Realisation mechanisms documented by Nix 2.35.2.
+    evidence:
+      - source: S0005
+        locator: "glossary: derivation, purity, and realise/realisation entries"
+        relation: supports
+    caveats:
+      - The manual says equal derivations producing equal outputs is an
+        assumption that cannot be guaranteed in general; builders may use
+        external inputs such as the network or system time.
+      - The alternatives do not establish identical bytes or equal provenance
+        and trust for local, remote, and substituted outputs.
+    relevance: Supplies the current mechanism for the realisation boundary.
+    reviewed: 2026-09-05
+
   - id: H0001
     statement: >-
       Nix supplies a strong realisation and selection substrate for a
@@ -365,3 +389,4 @@ claims:
         project or establish the capabilities of current systems.
     relevance: Connects the historical account to a later question for testing.
     reviewed: 2026-09-05
+
