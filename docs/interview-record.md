@@ -92,6 +92,13 @@ The series will be presented to listeners as a series about Nix and NixOS.
 Replayable development will emerge through the investigation as a recurring
 lens and potential synthesis rather than as a predetermined conclusion.
 
+## 2026-09-05: Listening model
+
+The series is intended for mixed listening: both away from a screen and while
+consulting companion material. Every episode must be intelligible as audio
+alone. Companion material should deepen and substantiate the account rather
+than complete an otherwise deficient explanation.
+
 ## 2026-09-05: Outcome boundary
 
 The project may formulate requirements and a conceptual architecture for the
@@ -107,6 +114,6 @@ The project record is public from the outset in smartnuf/nix-replay.
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
 - Which practical Nix and NixOS experiments should ground the investigation?
-- What tone, voices, episode length, and listening situation should guide the
+- What tone, voices, and approximate episode duration should guide the
   production?
 - Which podcast and companion-publication channels should eventually be used?

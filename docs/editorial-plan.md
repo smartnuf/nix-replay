@@ -60,6 +60,10 @@ demonstrate that system within this project.
 
 ## Companion-material pattern
 
+Every episode must be intelligible as audio alone. Its companion material
+should deepen and substantiate the account, and any spoken reference to it
+should be a clear signpost rather than a prerequisite.
+
 Every approved episode should eventually have:
 
 - one stable canonical page;

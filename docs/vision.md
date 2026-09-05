@@ -126,9 +126,18 @@ communities produced the ideas, and how those ideas changed over time.
 
 ## Companion publication
 
-The podcast is audio-led, not audio-only. Each episode should have one stable,
-easily discoverable companion page linked from podcast applications and, where
-practical, identified in the audio itself.
+The podcast is audio-led, not audio-only. It is designed for mixed listening:
+sometimes away from a screen and sometimes alongside the companion material.
+
+Each episode must remain intelligible as audio alone. Companion material should
+deepen, substantiate, illustrate, or enable practical follow-through rather
+than supply information required to understand the spoken account. Audio
+references to diagrams or documents must be clear signposts, not hidden
+prerequisites.
+
+Each episode should have one stable, easily discoverable companion page linked
+from podcast applications and, where practical, identified in the audio
+itself.
 
 Companion material may include:
 
