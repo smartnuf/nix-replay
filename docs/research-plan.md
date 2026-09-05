@@ -1,6 +1,6 @@
 # Research and evidence plan
 
-Status: proposed for research-design gate D1
+Status: approved at research-design gate D1 on 2026-09-05
 
 Issue: #2
 

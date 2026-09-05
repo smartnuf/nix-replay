@@ -10,14 +10,17 @@ direction.
 
 ## Current authority
 
-Discovery gate D0 is approved. The project is in research design D1.
+Discovery gate D0 and research-design gate D1 are approved. The project is in
+evidence collection D2.
 
-Work may specify research questions, source strategy, historical method,
-practical experiments, claim taxonomy, and treatment of disputed matters.
+Work may collect and assess sources, build the chronology and people map,
+analyse technical and ecosystem boundaries, specify and execute safe
+experiments, investigate companion publishing, and synthesise findings under
+docs/research-plan.md.
 
-Do not begin the evidence dossier, generate podcast scripts or audio, create
-feeds or releases, or distribute material until the applicable review gate in
-docs/process.md is explicitly approved.
+Do not generate podcast scripts or audio, create feeds or releases, distribute
+material, contact potential contributors, or build a software demonstrator
+until the applicable review and authority boundary is explicitly satisfied.
 
 ## Working rules
 

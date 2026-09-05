@@ -15,11 +15,11 @@ systems development more generally.
 
 ## Current status
 
-**Research design (D1). The project vision was approved on 2026-09-05.**
+**Evidence collection (D2). The research plan was approved on 2026-09-05.**
 
-No podcast script, audio, or publication has been approved. The research plan,
-evidence base, series specification, and episode scripts must pass their
-respective review gates before generation.
+No podcast script, audio, or publication has been approved. The evidence
+dossier, series specification, and episode scripts must pass their respective
+review gates before generation.
 
 ## Intended outputs
 
@@ -38,6 +38,8 @@ respective review gates before generation.
 - [Interview and decision record](docs/interview-record.md)
 - [Provisional editorial plan](docs/editorial-plan.md)
 - [Development and review process](docs/process.md)
+- [Approved research and evidence plan](docs/research-plan.md)
+- [Research-plan implications map](docs/research-plan-map.md)
 
 The public-facing title, audience, episode count, production format, publishing
 arrangements, and licence remain open decisions.
