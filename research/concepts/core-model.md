@@ -7,17 +7,19 @@ claim that Nix is a complete development-process system.
 
 | Boundary | Durable description or object | What the mechanism controls | What remains outside or contingent |
 | --- | --- | --- | --- |
-| Nix evaluation | Nix expressions and supplied inputs | Computes values and derivation graphs | Source selection, evaluator inputs, impure evaluation, and author intent |
-| Derivation | Builder, environment, declared dependencies, outputs | Describes a build action and its dependency graph | Undeclared dependencies, builder behaviour, platform effects, and permitted nondeterminism |
+| Nix evaluation (2008 account) | Nix expressions and supplied inputs | Computes values and derivation graphs | Source selection, evaluator inputs, impure evaluation, and author intent |
+| Derivation (2008 account) | Builder, environment, declared dependencies, outputs | Describes a build action and its dependency graph | Undeclared dependencies, builder behaviour, platform effects, and permitted nondeterminism |
 | Build realisation | Realised store object | Runs a builder or accepts a substitute to obtain the requested output | Undeclared inputs, platform effects, sandbox policy, clocks, entropy, trust, and defects |
 | Store | Immutable store objects and references | Preserves realised objects and their reference graph | Which objects a particular store currently contains |
 | Profile or generation | A selected environment or system closure | Makes one selection current without overwriting store objects | Mutable user data and external services |
 | NixOS modules | Option declarations and definitions combined into a configuration | Composes a full declarative system configuration | Whether declarations capture every operational requirement |
 | Activation and runtime | Selected system configuration and activation scripts | Attempts to move the running machine to the selected configuration | Running state, effectful transitions, persistent data, live traffic, failures, and observation |
 
-The source basis is C0004-C0007. Each row deliberately names a boundary where
-the word "reproducible" needs a subject: description, derivation, build output,
-store object, selected closure, static configuration, or running service.
+The two historical rows report the 2008 model in C0004. The remaining
+mechanism rows use the versioned current accounts in C0005-C0007. Each row
+deliberately names a boundary where the word "reproducible" needs a subject:
+description, derivation, build output, store object, selected closure, static
+configuration, or running service.
 
 ## Four distinctions the series must preserve
 
