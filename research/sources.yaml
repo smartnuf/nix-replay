@@ -92,13 +92,16 @@ sources:
     kind: reference-manual
     publisher: NixOS project
     url: https://nixos.org/manual/nixos/stable/
-    version: "26.05"
+    snapshot_url: https://github.com/NixOS/nixpkgs/tree/a5cc6f2c37bf518436dc8d1c288ccd0c43c2f4c4/nixos/doc/manual
+    version: "26.05 at Nixpkgs a5cc6f2c37bf518436dc8d1c288ccd0c43c2f4c4"
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Official manual for the named NixOS release.
     scope: Modules, system realisation, activation, generations, and rollback.
     rights_status: not-assessed-for-republication
-    notes: The stable URL moves; the recorded release is part of the citation.
+    notes: >-
+      The stable URL moves. snapshot_url preserves the reviewed manual source
+      at the access-date commit; locators name sections in its rendered form.
 
   - id: S0007
     title: Nix software citation metadata

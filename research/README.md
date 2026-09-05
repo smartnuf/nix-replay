@@ -25,6 +25,7 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
 - `kind`: paper, thesis, manual, project index, or software metadata.
 - `publisher`: venue or responsible organisation.
 - `url`: direct or canonical location.
+- `snapshot_url`: optional immutable or release-specific reviewed location.
 - `version`: release, edition, or `not-versioned`.
 - `accessed`: date last checked.
 - `source_class`: one of the six classes approved in the research plan.

@@ -13,7 +13,7 @@ claim that Nix is a complete development-process system.
 | Store | Immutable store objects and references | Preserves realised objects and their reference graph | Which objects a particular store currently contains |
 | Profile or generation | A selected environment or system closure | Makes one selection current without overwriting store objects | Mutable user data and external services |
 | NixOS modules | Option declarations and definitions combined into a configuration | Composes a full declarative system configuration | Whether declarations capture every operational requirement |
-| Activation and runtime | Switch program, services, and running state | Attempts to move the running machine to the selected configuration | Effectful transitions, persistent data, live traffic, failures, and observation |
+| Activation and runtime | Selected system configuration and activation scripts | Attempts to move the running machine to the selected configuration | Running state, effectful transitions, persistent data, live traffic, failures, and observation |
 
 The source basis is C0004-C0007. Each row deliberately names a boundary where
 the word "reproducible" needs a subject: description, derivation, build output,
