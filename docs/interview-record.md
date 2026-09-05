@@ -92,6 +92,13 @@ The series will be presented to listeners as a series about Nix and NixOS.
 Replayable development will emerge through the investigation as a recurring
 lens and potential synthesis rather than as a predetermined conclusion.
 
+## 2026-09-05: Voice structure
+
+The presentation will be hybrid: one principal narrator, with a second voice
+used selectively for substantive questions, objections, attributed quotations,
+or contrasting interpretations. It should not simulate casual banter or
+impersonate historical people.
+
 ## 2026-09-05: Listening model
 
 The series is intended for mixed listening: both away from a screen and while
@@ -114,6 +121,5 @@ The project record is public from the outset in smartnuf/nix-replay.
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
 - Which practical Nix and NixOS experiments should ground the investigation?
-- What tone, voices, and approximate episode duration should guide the
-  production?
+- What tone and approximate episode duration should guide the production?
 - Which podcast and companion-publication channels should eventually be used?

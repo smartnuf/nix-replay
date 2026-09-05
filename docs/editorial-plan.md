@@ -58,6 +58,16 @@ Where the evidence warrants it, formulate requirements and a conceptual
 architecture for a replayable development system. Do not implement or
 demonstrate that system within this project.
 
+## Voice pattern
+
+Use one principal narrator to maintain continuity, precision, and the authored
+argument. Use a second voice only where it adds genuine structure: a
+substantive question, objection, brief attributed quotation, or contrasting
+interpretation.
+
+Do not manufacture casual banter. Do not imitate a real person's voice.
+Clearly distinguish attributed quotation from paraphrased perspective.
+
 ## Companion-material pattern
 
 Every episode must be intelligible as audio alone. Its companion material

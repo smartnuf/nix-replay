@@ -34,6 +34,15 @@ separately. The series is not an open-ended publishing commitment.
 The episode count and duration remain to be decided from the research and
 narrative needs rather than imposed in advance.
 
+The presentation will use a hybrid voice structure. One principal narrator
+will provide continuity, precision, and the authored argument. A second voice
+may be used selectively for substantive questions, objections, brief
+attributed quotations, or contrasting interpretations.
+
+The second voice must not create simulated casual banter or impersonate a real
+person. Historical perspectives should be quoted briefly and attributed, or
+clearly presented as paraphrase.
+
 ## Public framing
 
 The series will present Nix and NixOS as its concrete subject. Replayable
