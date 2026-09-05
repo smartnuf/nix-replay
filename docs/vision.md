@@ -43,6 +43,11 @@ The second voice must not create simulated casual banter or impersonate a real
 person. Historical perspectives should be quoted briefly and attributed, or
 clearly presented as paraphrase.
 
+The tone will be that of an investigative technical documentary:
+intellectually curious, precise, candid about uncertainty, historically alert,
+and warm enough to enjoy. Occasional understated wit is welcome. Avoid hype,
+synthetic enthusiasm, textbook recital, and manufactured disagreement.
+
 ## Public framing
 
 The series will present Nix and NixOS as its concrete subject. Replayable

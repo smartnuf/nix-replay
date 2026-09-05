@@ -92,6 +92,13 @@ The series will be presented to listeners as a series about Nix and NixOS.
 Replayable development will emerge through the investigation as a recurring
 lens and potential synthesis rather than as a predetermined conclusion.
 
+## 2026-09-05: Tone
+
+The agreed tone is an investigative technical documentary: intellectually
+curious, precise, candid about uncertainty, historically alert, warm, and
+occasionally wry. Avoid hype, synthetic enthusiasm, textbook recital, and
+manufactured disagreement.
+
 ## 2026-09-05: Voice structure
 
 The presentation will be hybrid: one principal narrator, with a second voice
@@ -121,5 +128,5 @@ The project record is public from the outset in smartnuf/nix-replay.
 - What detailed prior knowledge may be assumed beyond general technical
   literacy?
 - Which practical Nix and NixOS experiments should ground the investigation?
-- What tone and approximate episode duration should guide the production?
+- What approximate episode duration should guide the production?
 - Which podcast and companion-publication channels should eventually be used?

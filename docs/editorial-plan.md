@@ -68,6 +68,13 @@ interpretation.
 Do not manufacture casual banter. Do not imitate a real person's voice.
 Clearly distinguish attributed quotation from paraphrased perspective.
 
+## Tone
+
+Use an investigative technical-documentary tone: intellectually curious,
+precise, candid about uncertainty, historically alert, warm, and occasionally
+wry. Avoid hype, synthetic enthusiasm, textbook recital, and manufactured
+disagreement.
+
 ## Companion-material pattern
 
 Every episode must be intelligible as audio alone. Its companion material
