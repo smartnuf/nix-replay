@@ -33,6 +33,7 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
 - `scope`: what we may use it to establish.
 - `rights_status`: status for reuse in companion material. This is separate
   from permission to read, cite, and make short attributed quotations.
+- `intended_use`: planned use under assessment, independently of rights status.
 - `notes`: cautions about interpretation or currency.
 
 ## Claim records

@@ -17,6 +17,7 @@ sources:
     authority: Original Nix research paper by its named authors.
     scope: Early design, motivation, store identity, environments, and rollback.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: Claims are historical and describe the 2004 implementation.
 
   - id: S0002
@@ -33,6 +34,7 @@ sources:
     authority: University publication record for the originating thesis.
     scope: Thesis chronology, authorship, and stated deployment model.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: The record includes the abstract; use the thesis for deeper claims.
 
   - id: S0003
@@ -50,6 +52,7 @@ sources:
     authority: Original NixOS research paper by its named authors.
     scope: NixOS design, derivations, declarative system construction, and limits.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: Describes the 2008 system; current behaviour needs current manuals.
 
   - id: S0004
@@ -69,6 +72,7 @@ sources:
       Publication chronology, credited authors, attributed abstract summaries,
       and links to original work.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: >-
       The immutable homepage-source snapshot preserves the reviewed index. An
       index is not a substitute for reading cited papers.
@@ -88,6 +92,7 @@ sources:
     authority: Versioned official reference manual for Nix.
     scope: Current store objects, references, profiles, and command semantics.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: >-
       The series URL can move within Nix 2.35. snapshot_url preserves the exact
       2.35.2 manual source reviewed; locators name sections in rendered form.
@@ -107,6 +112,7 @@ sources:
     authority: Official manual for the named NixOS release.
     scope: Modules, system realisation, activation, generations, and rollback.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: >-
       The stable URL moves. snapshot_url preserves the reviewed manual source
       at the access-date commit; locators name sections in its rendered form.
@@ -126,6 +132,7 @@ sources:
     authority: Citation metadata shipped in the official Nix repository.
     scope: Current project-level attribution and preferred thesis reference.
     rights_status: repository-licence-lgpl-2.1
+    intended_use: citation-and-short-attributed-quotation
     notes: Project credit is collective; it is not a contribution ranking.
 
   - id: S0008
@@ -143,6 +150,7 @@ sources:
     authority: Original system-configuration paper by its named authors.
     scope: Early NixOS model, mechanisms, evaluation, and acknowledged limits.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: Historical claims describe the 2007 implementation.
 
   - id: S0009
@@ -162,4 +170,27 @@ sources:
     authority: Original Nix build-farm paper by its named authors.
     scope: Build-environment management, variability, and continuous integration.
     rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
     notes: Historical claims describe the 2008 build-farm implementation.
+
+  - id: S0010
+    title: Imposing a Memory Management Discipline on Software Deployment
+    creators:
+      - Eelco Dolstra
+      - Eelco Visser
+      - Merijn de Jonge
+    published: 2004
+    kind: conference-paper
+    publisher: >-
+      26th International Conference on Software Engineering (ICSE 2004)
+    url: https://nixos.org/~eelco/pubs/immdsd-icse2004-final.pdf
+    version: final-paper
+    accessed: 2026-09-05
+    source_class: contemporary-primary
+    authority: Original deployment-discipline paper by its named authors.
+    scope: >-
+      Memory-management analogy, dependency detection, closures, component
+      identity, and garbage collection in the 2004 design.
+    rights_status: not-assessed-for-republication
+    intended_use: citation-and-short-attributed-quotation
+    notes: Historical claims describe the 2004 design and implementation.

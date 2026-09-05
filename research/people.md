@@ -9,8 +9,8 @@ community-building are different kinds of credit.
 | --- | --- | --- |
 | Eelco Dolstra | Author of the 2006 thesis; co-author of the 2004 Nix and 2008/2010 NixOS papers | S0001-S0004, S0007 |
 | Merijn de Jonge | Co-author of the 2004 LISA Nix paper | S0001, S0004 |
-| Eelco Visser | Co-author of the 2004 LISA Nix paper and 2008 Nix Build Farm paper | S0001, S0004 |
-| Armijn Hemel | Co-author of the 2007 system-configuration paper | S0004 |
+| Eelco Visser | Co-author of the 2004 LISA Nix paper and 2008 Nix Build Farm paper | S0001, S0004, S0009 |
+| Armijn Hemel | Co-author of the 2007 system-configuration paper | S0004, S0008 |
 | Andres Löh | Co-author of the 2008 and 2010 NixOS papers | S0003, S0004 |
 | Nicolas Pierron | Co-author of the 2010 journal NixOS paper | S0004 |
 | Nix contributors | Collectively credited by current Nix citation metadata | S0007 |
