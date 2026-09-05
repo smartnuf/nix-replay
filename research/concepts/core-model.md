@@ -9,7 +9,7 @@ claim that Nix is a complete development-process system.
 | --- | --- | --- | --- |
 | Nix evaluation | Nix expressions and supplied inputs | Computes values and derivation graphs | Source selection, evaluator inputs, impure evaluation, and author intent |
 | Derivation | Builder, environment, declared dependencies, outputs | Describes a build action and its dependency graph | Undeclared dependencies, builder behaviour, platform effects, and permitted nondeterminism |
-| Build realisation | Build execution and produced output | Attempts to realise the derivation in a controlled environment | Kernel, hardware, remote builders, sandbox policy, clocks, entropy, and defects |
+| Build realisation | Realised store object | Runs a builder or accepts a substitute to obtain the requested output | Undeclared inputs, platform effects, sandbox policy, clocks, entropy, trust, and defects |
 | Store | Immutable store objects and references | Preserves realised objects and their reference graph | Which objects a particular store currently contains |
 | Profile or generation | A selected environment or system closure | Makes one selection current without overwriting store objects | Mutable user data and external services |
 | NixOS modules | Option declarations and definitions combined into a configuration | Composes a full declarative system configuration | Whether declarations capture every operational requirement |
