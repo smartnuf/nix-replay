@@ -12,13 +12,15 @@ have the same epistemic status.
 - `H####` identifies an inference or hypothesis to test.
 - `J####` identifies a project judgement or recommendation.
 
-Identifiers are stable. Retire a record rather than reusing its identifier.
+Identifiers are stable. Registers retain allocated records: retire or
+supersede a record in place rather than deleting it or reusing its identifier.
 
 ## Source records
 
-`sources.yaml` uses this schema:
+`sources.yaml` uses schema version 2:
 
 - `id`: stable source identifier.
+- `status`: `active`, `retired`, or `superseded`.
 - `title`: title as published.
 - `creators`: credited authors or responsible organisation.
 - `published`: publication date or year, as precisely as established.
@@ -35,6 +37,14 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
   from permission to read, cite, and make short attributed quotations.
 - `intended_use`: planned use under assessment, independently of rights status.
 - `notes`: cautions about interpretation or currency.
+- `superseded_by`: replacement source ID, required only for `superseded`.
+- `lifecycle_note`: reason for retirement or supersession, required for
+  `retired` and `superseded`.
+
+An active source omits `superseded_by` and `lifecycle_note`. A retired source
+remains available for provenance but should receive no new reliance. A
+superseded source points to another retained source record. Retirement or
+supersession does not remove existing dependent-claim impact checks.
 
 ## Claim records
 

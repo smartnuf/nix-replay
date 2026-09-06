@@ -38,7 +38,7 @@ State the bounded question, expected records, affected derived views, and
 checks that will show the change is complete. For an experiment, use the
 pre-execution fields and safety rules in the research plan.
 
-Allocate stable IDs without reusing retired identifiers:
+Allocate stable IDs without reusing retired or superseded identifiers:
 
 - `S####` for a source;
 - `C####` for a fact or attributed report;
@@ -92,6 +92,8 @@ When adding, changing, superseding, or retiring a source:
   and
 - check whether any proposed quotation, image, diagram, or redistributed
   material needs a separate rights record or assessment.
+- retain retired and superseded records in the register; record their lifecycle
+  state, reason, and replacement where applicable rather than deleting them.
 
 ## Claim-impact checklist
 
@@ -112,7 +114,7 @@ When adding, changing, superseding, or retiring a claim:
   examined;
 - find every use of the claim ID and update chronology, people, concepts,
   ecosystem notes, experiments, and synthesis as needed; and
-- retire or supersede displaced records without reusing their IDs.
+- retire displaced records in place without deleting or reusing their IDs.
 
 ## Derived-view checklist
 
@@ -198,8 +200,9 @@ person, convention, or service.
 
 `tools/validate_evidence.py` checks the mechanically decidable parts of the
 documented schemas: YAML shape, stable and unique identifiers, required fields,
-enums, report attribution, source references, rights fields, and registered IDs
-used in research Markdown.
+enums, report attribution, source references, rights fields, registered IDs
+used in research Markdown, lifecycle consistency, and retention of identifiers
+allocated in a supplied Git baseline.
 
 Passing validation does not establish that a source is adequate, a claim fits
 the source's scope, an attribution is causal, a contribution ranking is fair,

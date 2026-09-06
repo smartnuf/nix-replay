@@ -7,11 +7,15 @@ from pathlib import Path
 
 import yaml
 
-from tools.validate_evidence import validate_repository
+from tools.validate_evidence import (
+    _validate_identifier_history,
+    validate_repository,
+)
 
 
 VALID_SOURCE = {
     "id": "S0001",
+    "status": "active",
     "title": "Example source",
     "creators": ["Example Author"],
     "published": 2026,
@@ -60,7 +64,7 @@ class EvidenceValidatorTests(unittest.TestCase):
 
     def write_fixture(self, markdown: str = "[C0001] [S0001]\n") -> None:
         source_document = {
-            "schema_version": 1,
+            "schema_version": 2,
             "updated": "2026-09-06",
             "sources": self.sources,
         }
@@ -119,6 +123,44 @@ class EvidenceValidatorTests(unittest.TestCase):
         self.sources[0]["creators"] = []
         self.assert_has_error(self.errors(), ".creators: must not be empty")
 
+    def test_retired_source_is_retained_with_a_reason(self) -> None:
+        self.sources[0]["status"] = "retired"
+        self.sources[0]["lifecycle_note"] = "No longer competent evidence."
+        self.assertEqual(self.errors(), [])
+
+    def test_retired_source_requires_a_reason(self) -> None:
+        self.sources[0]["status"] = "retired"
+        self.assert_has_error(
+            self.errors(), "retired sources require lifecycle_note"
+        )
+
+    def test_valid_source_supersession_passes(self) -> None:
+        second = copy.deepcopy(VALID_SOURCE)
+        second["id"] = "S0002"
+        self.sources.append(second)
+        self.sources[0]["status"] = "superseded"
+        self.sources[0]["superseded_by"] = "S0002"
+        self.sources[0]["lifecycle_note"] = "Replaced by a current edition."
+        self.assertEqual(self.errors(), [])
+
+    def test_supersession_target_must_exist(self) -> None:
+        self.sources[0]["status"] = "superseded"
+        self.sources[0]["superseded_by"] = "S0002"
+        self.sources[0]["lifecycle_note"] = "Replaced by a current edition."
+        self.assert_has_error(
+            self.errors(), "unknown source identifier S0002"
+        )
+
+    def test_source_supersession_cycle_is_rejected(self) -> None:
+        second = copy.deepcopy(VALID_SOURCE)
+        second["id"] = "S0002"
+        self.sources.append(second)
+        for source, target in zip(self.sources, ("S0002", "S0001")):
+            source["status"] = "superseded"
+            source["superseded_by"] = target
+            source["lifecycle_note"] = "Invalid test cycle."
+        self.assert_has_error(self.errors(), "supersession cycle")
+
     def test_blank_intended_use_is_rejected(self) -> None:
         self.sources[0]["intended_use"] = ""
         self.assert_has_error(
@@ -155,6 +197,49 @@ class EvidenceValidatorTests(unittest.TestCase):
         self.assert_has_error(
             validate_repository(self.root), "duplicate key 'updated'"
         )
+
+    def test_allocated_identifiers_must_remain_in_registers(self) -> None:
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": copy.deepcopy(VALID_SOURCE)},
+            {"C0001": copy.deepcopy(VALID_CLAIM)},
+            {},
+            {},
+            errors,
+        )
+        self.assert_has_error(errors, "allocated identifier S0001")
+        self.assert_has_error(errors, "allocated identifier C0001")
+
+    def test_inactive_source_record_must_not_change(self) -> None:
+        previous = copy.deepcopy(VALID_SOURCE)
+        previous["status"] = "retired"
+        previous["lifecycle_note"] = "Retained test record."
+        current = copy.deepcopy(previous)
+        current["title"] = "Repurposed source"
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": previous},
+            {},
+            {"S0001": current},
+            {},
+            errors,
+        )
+        self.assert_has_error(errors, "inactive record S0001 must not change")
+
+    def test_retired_claim_record_must_not_change(self) -> None:
+        previous = copy.deepcopy(VALID_CLAIM)
+        previous["status"] = "retired"
+        current = copy.deepcopy(previous)
+        current["statement"] = "A different proposition."
+        errors: list[str] = []
+        _validate_identifier_history(
+            {},
+            {"C0001": previous},
+            {},
+            {"C0001": current},
+            errors,
+        )
+        self.assert_has_error(errors, "retired record C0001 must not change")
 
 
 if __name__ == "__main__":

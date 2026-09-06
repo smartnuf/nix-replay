@@ -6,6 +6,7 @@ from __future__ import annotations
 import argparse
 import datetime as dt
 import re
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -25,6 +26,7 @@ SOURCE_CLASSES = {
     "community-report",
     "project-experiment-or-synthesis",
 }
+SOURCE_STATUSES = {"active", "retired", "superseded"}
 CLAIM_KINDS = {"fact", "report", "inference", "hypothesis", "judgement"}
 CLAIM_STATUSES = {"supported", "provisional", "open", "contested", "retired"}
 CONFIDENCES = {"high", "medium", "low"}
@@ -38,6 +40,7 @@ CLAIM_PREFIXES = {
 
 SOURCE_FIELDS = {
     "id",
+    "status",
     "title",
     "creators",
     "published",
@@ -53,8 +56,14 @@ SOURCE_FIELDS = {
     "rights_status",
     "intended_use",
     "notes",
+    "superseded_by",
+    "lifecycle_note",
 }
-REQUIRED_SOURCE_FIELDS = SOURCE_FIELDS - {"snapshot_url"}
+REQUIRED_SOURCE_FIELDS = SOURCE_FIELDS - {
+    "snapshot_url",
+    "superseded_by",
+    "lifecycle_note",
+}
 CLAIM_FIELDS = {
     "id",
     "statement",
@@ -74,6 +83,7 @@ ROOT_FIELDS = {
     "sources.yaml": {"schema_version", "updated", "sources"},
     "claims.yaml": {"schema_version", "updated", "claims"},
 }
+SCHEMA_VERSIONS = {"sources.yaml": 2, "claims.yaml": 1}
 
 
 class UniqueKeyLoader(yaml.SafeLoader):
@@ -111,16 +121,66 @@ def _display(path: Path, root: Path) -> str:
         return str(path)
 
 
-def _load_yaml(path: Path, root: Path, errors: list[str]) -> Any:
-    label = _display(path, root)
+def _parse_yaml(text: str, label: str, errors: list[str]) -> Any:
     try:
-        with path.open(encoding="utf-8") as stream:
-            return yaml.load(stream, Loader=UniqueKeyLoader)
-    except OSError as exc:
-        errors.append(f"{label}: cannot read file: {exc}")
+        return yaml.load(text, Loader=UniqueKeyLoader)
     except yaml.YAMLError as exc:
         errors.append(f"{label}: invalid YAML: {exc}")
     return None
+
+
+def _load_yaml(path: Path, root: Path, errors: list[str]) -> Any:
+    label = _display(path, root)
+    try:
+        text = path.read_text(encoding="utf-8")
+    except OSError as exc:
+        errors.append(f"{label}: cannot read file: {exc}")
+        return None
+    return _parse_yaml(text, label, errors)
+
+
+def _resolve_revision(
+    root: Path, revision: str, errors: list[str]
+) -> str | None:
+    result = subprocess.run(
+        [
+            "git",
+            "rev-parse",
+            "--verify",
+            "--end-of-options",
+            f"{revision}^{{commit}}",
+        ],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    if result.returncode:
+        detail = result.stderr.strip() or "revision not found"
+        errors.append(f"baseline {revision!r}: {detail}")
+        return None
+    return result.stdout.strip()
+
+
+def _load_yaml_at_revision(
+    root: Path,
+    revision: str,
+    relative_path: str,
+    errors: list[str],
+) -> Any:
+    result = subprocess.run(
+        ["git", "show", f"{revision}:{relative_path}"],
+        cwd=root,
+        check=False,
+        capture_output=True,
+        text=True,
+    )
+    label = f"{revision}:{relative_path}"
+    if result.returncode:
+        detail = result.stderr.strip() or "file not found"
+        errors.append(f"{label}: cannot read baseline file: {detail}")
+        return None
+    return _parse_yaml(result.stdout, label, errors)
 
 
 def _is_blank(value: Any) -> bool:
@@ -165,8 +225,11 @@ def _check_root(
         location,
         errors,
     )
-    if document.get("schema_version") != 1:
-        errors.append(f"{location}.schema_version: expected 1")
+    expected_version = SCHEMA_VERSIONS[filename]
+    if document.get("schema_version") != expected_version:
+        errors.append(
+            f"{location}.schema_version: expected {expected_version}"
+        )
     updated = document.get("updated")
     if not isinstance(updated, (str, dt.date)) or _is_blank(updated):
         errors.append(
@@ -202,8 +265,10 @@ def _check_string_list(
         _check_non_empty_string(item, f"{location}[{index}]", errors)
 
 
-def _validate_sources(records: list[Any], errors: list[str]) -> set[str]:
-    identifiers: set[str] = set()
+def _validate_sources(
+    records: list[Any], errors: list[str]
+) -> dict[str, dict[str, Any]]:
+    registered: dict[str, dict[str, Any]] = {}
     scalar_fields = REQUIRED_SOURCE_FIELDS - {
         "creators",
         "published",
@@ -229,10 +294,10 @@ def _validate_sources(records: list[Any], errors: list[str]) -> set[str]:
         )
         if not valid_identifier:
             errors.append(f"{location}.id: expected S followed by four digits")
-        elif identifier in identifiers:
+        elif identifier in registered:
             errors.append(f"{location}.id: duplicate identifier {identifier}")
         else:
-            identifiers.add(identifier)
+            registered[identifier] = record
 
         for name in sorted(scalar_fields & record.keys()):
             _check_non_empty_string(record[name], f"{location}.{name}", errors)
@@ -247,6 +312,11 @@ def _validate_sources(records: list[Any], errors: list[str]) -> set[str]:
                 f"{location}.source_class: expected one of "
                 f"{', '.join(sorted(SOURCE_CLASSES))}"
             )
+        if record.get("status") not in SOURCE_STATUSES:
+            errors.append(
+                f"{location}.status: expected one of "
+                f"{', '.join(sorted(SOURCE_STATUSES))}"
+            )
         for name in ("published", "accessed"):
             value = record.get(name)
             if not isinstance(value, (str, int, dt.date)) or _is_blank(value):
@@ -258,13 +328,97 @@ def _validate_sources(records: list[Any], errors: list[str]) -> set[str]:
             _check_non_empty_string(
                 record["snapshot_url"], f"{location}.snapshot_url", errors
             )
-    return identifiers
+    _validate_source_lifecycle(registered, errors)
+    return registered
+
+
+def _validate_source_lifecycle(
+    records: dict[str, dict[str, Any]], errors: list[str]
+) -> None:
+    for identifier, record in records.items():
+        location = f"research/sources.yaml:{identifier}"
+        status = record.get("status")
+        has_target = "superseded_by" in record
+        has_note = "lifecycle_note" in record
+
+        if status == "active":
+            if has_target or has_note:
+                errors.append(
+                    f"{location}: active sources must omit lifecycle fields"
+                )
+        elif status == "retired":
+            if has_target:
+                errors.append(
+                    f"{location}: retired sources must omit superseded_by"
+                )
+            if not has_note:
+                errors.append(
+                    f"{location}: retired sources require lifecycle_note"
+                )
+        elif status == "superseded":
+            if not has_target:
+                errors.append(
+                    f"{location}: superseded sources require superseded_by"
+                )
+            if not has_note:
+                errors.append(
+                    f"{location}: superseded sources require lifecycle_note"
+                )
+
+        if has_note:
+            _check_non_empty_string(
+                record["lifecycle_note"], f"{location}.lifecycle_note", errors
+            )
+        if not has_target:
+            continue
+        target = record["superseded_by"]
+        if not isinstance(target, str) or not SOURCE_ID.fullmatch(target):
+            errors.append(
+                f"{location}.superseded_by: expected a source identifier"
+            )
+        elif target == identifier:
+            errors.append(
+                f"{location}.superseded_by: must not refer to itself"
+            )
+        elif target not in records:
+            errors.append(
+                f"{location}.superseded_by: unknown source identifier {target}"
+            )
+        elif records[target].get("status") == "retired":
+            errors.append(
+                f"{location}.superseded_by: target {target} is retired"
+            )
+
+    reported_cycles: set[frozenset[str]] = set()
+    for start in records:
+        positions: dict[str, int] = {}
+        path: list[str] = []
+        current = start
+        while (
+            current in records
+            and records[current].get("status") == "superseded"
+        ):
+            if current in positions:
+                cycle = frozenset(path[positions[current] :])
+                if cycle not in reported_cycles:
+                    errors.append(
+                        "research/sources.yaml: supersession cycle: "
+                        + " -> ".join((*path[positions[current] :], current))
+                    )
+                    reported_cycles.add(cycle)
+                break
+            positions[current] = len(path)
+            path.append(current)
+            target = records[current].get("superseded_by")
+            if not isinstance(target, str):
+                break
+            current = target
 
 
 def _validate_claims(
     records: list[Any], source_ids: set[str], errors: list[str]
-) -> set[str]:
-    identifiers: set[str] = set()
+) -> dict[str, dict[str, Any]]:
+    registered: dict[str, dict[str, Any]] = {}
     scalar_fields = REQUIRED_CLAIM_FIELDS - {"evidence", "caveats", "reviewed"}
 
     for index, record in enumerate(records):
@@ -288,10 +442,10 @@ def _validate_claims(
             errors.append(
                 f"{location}.id: expected C, H, or J followed by four digits"
             )
-        elif identifier in identifiers:
+        elif identifier in registered:
             errors.append(f"{location}.id: duplicate identifier {identifier}")
         else:
-            identifiers.add(identifier)
+            registered[identifier] = record
 
         for name in sorted(scalar_fields & record.keys()):
             _check_non_empty_string(record[name], f"{location}.{name}", errors)
@@ -367,7 +521,7 @@ def _validate_claims(
             errors.append(
                 f"{location}.reviewed: expected a date or non-empty string"
             )
-    return identifiers
+    return registered
 
 
 def _validate_markdown_ids(
@@ -397,7 +551,75 @@ def _validate_markdown_ids(
                     )
 
 
-def validate_repository(root: Path) -> list[str]:
+def _index_baseline_records(
+    document: Any,
+    collection: str,
+    identifier_pattern: re.Pattern[str],
+    label: str,
+    errors: list[str],
+) -> dict[str, dict[str, Any]]:
+    if not isinstance(document, dict) or not isinstance(
+        document.get(collection), list
+    ):
+        errors.append(f"{label}: baseline register has invalid shape")
+        return {}
+    indexed: dict[str, dict[str, Any]] = {}
+    for record in document[collection]:
+        if not isinstance(record, dict):
+            errors.append(f"{label}: baseline record must be a mapping")
+            continue
+        identifier = record.get("id")
+        if not isinstance(identifier, str) or not identifier_pattern.fullmatch(
+            identifier
+        ):
+            errors.append(f"{label}: baseline record has malformed identifier")
+        elif identifier in indexed:
+            errors.append(
+                f"{label}: duplicate baseline identifier {identifier}"
+            )
+        else:
+            indexed[identifier] = record
+    return indexed
+
+
+def _validate_identifier_history(
+    previous_sources: dict[str, dict[str, Any]],
+    previous_claims: dict[str, dict[str, Any]],
+    current_sources: dict[str, dict[str, Any]],
+    current_claims: dict[str, dict[str, Any]],
+    errors: list[str],
+) -> None:
+    for identifier, previous in previous_sources.items():
+        current = current_sources.get(identifier)
+        if current is None:
+            errors.append(
+                f"research/sources.yaml: allocated identifier {identifier} "
+                "must remain in the register"
+            )
+        elif previous.get("status") in {"retired", "superseded"}:
+            if current != previous:
+                errors.append(
+                    f"research/sources.yaml: inactive record {identifier} "
+                    "must not change"
+                )
+
+    for identifier, previous in previous_claims.items():
+        current = current_claims.get(identifier)
+        if current is None:
+            errors.append(
+                f"research/claims.yaml: allocated identifier {identifier} "
+                "must remain in the register"
+            )
+        elif previous.get("status") == "retired" and current != previous:
+            errors.append(
+                f"research/claims.yaml: retired record {identifier} "
+                "must not change"
+            )
+
+
+def validate_repository(
+    root: Path, baseline_ref: str | None = None
+) -> list[str]:
     """Return all structural evidence errors found below *root*."""
 
     root = root.resolve()
@@ -411,9 +633,42 @@ def validate_repository(root: Path) -> list[str]:
     claim_records = _check_root(
         claims_document, "claims.yaml", "claims", errors
     )
-    source_ids = _validate_sources(source_records, errors)
-    claim_ids = _validate_claims(claim_records, source_ids, errors)
-    _validate_markdown_ids(research_dir, root, source_ids, claim_ids, errors)
+    sources = _validate_sources(source_records, errors)
+    claims = _validate_claims(claim_records, set(sources), errors)
+    _validate_markdown_ids(
+        research_dir, root, set(sources), set(claims), errors
+    )
+
+    if baseline_ref:
+        revision = _resolve_revision(root, baseline_ref, errors)
+        if revision:
+            previous_sources_document = _load_yaml_at_revision(
+                root, revision, "research/sources.yaml", errors
+            )
+            previous_claims_document = _load_yaml_at_revision(
+                root, revision, "research/claims.yaml", errors
+            )
+            previous_sources = _index_baseline_records(
+                previous_sources_document,
+                "sources",
+                SOURCE_ID,
+                f"{revision}:research/sources.yaml",
+                errors,
+            )
+            previous_claims = _index_baseline_records(
+                previous_claims_document,
+                "claims",
+                CLAIM_ID,
+                f"{revision}:research/claims.yaml",
+                errors,
+            )
+            _validate_identifier_history(
+                previous_sources,
+                previous_claims,
+                sources,
+                claims,
+                errors,
+            )
     return errors
 
 
@@ -425,8 +680,12 @@ def main(argv: list[str] | None = None) -> int:
         default=Path(__file__).resolve().parents[1],
         help="repository root (defaults to the validator's repository)",
     )
+    parser.add_argument(
+        "--baseline-ref",
+        help="Git revision whose allocated identifiers must be retained",
+    )
     arguments = parser.parse_args(argv)
-    errors = validate_repository(arguments.root)
+    errors = validate_repository(arguments.root, arguments.baseline_ref)
     if errors:
         for error in errors:
             print(f"error: {error}", file=sys.stderr)

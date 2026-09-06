@@ -1,7 +1,8 @@
-schema_version: 1
-updated: 2026-09-05
+schema_version: 2
+updated: 2026-09-06
 sources:
   - id: S0001
+    status: active
     title: "Nix: A Safe and Policy-Free System for Software Deployment"
     creators:
       - Eelco Dolstra
@@ -21,6 +22,7 @@ sources:
     notes: Claims are historical and describe the 2004 implementation.
 
   - id: S0002
+    status: active
     title: The Purely Functional Software Deployment Model
     creators:
       - Eelco Dolstra
@@ -38,6 +40,7 @@ sources:
     notes: The record includes the abstract; use the thesis for deeper claims.
 
   - id: S0003
+    status: active
     title: "NixOS: A Purely Functional Linux Distribution"
     creators:
       - Eelco Dolstra
@@ -56,6 +59,7 @@ sources:
     notes: Describes the 2008 system; current behaviour needs current manuals.
 
   - id: S0004
+    status: active
     title: Research and Scientific Publications
     creators:
       - NixOS Foundation
@@ -78,6 +82,7 @@ sources:
       index is not a substitute for reading cited papers.
 
   - id: S0005
+    status: active
     title: Nix Reference Manual
     creators:
       - Nix contributors
@@ -98,6 +103,7 @@ sources:
       2.35.2 manual source reviewed; locators name sections in rendered form.
 
   - id: S0006
+    status: active
     title: NixOS Manual
     creators:
       - NixOS contributors
@@ -118,6 +124,7 @@ sources:
       at the access-date commit; locators name sections in its rendered form.
 
   - id: S0007
+    status: active
     title: Nix software citation metadata
     creators:
       - Eelco Dolstra
@@ -136,6 +143,7 @@ sources:
     notes: Project credit is collective; it is not a contribution ranking.
 
   - id: S0008
+    status: active
     title: Purely Functional System Configuration Management
     creators:
       - Eelco Dolstra
@@ -154,6 +162,7 @@ sources:
     notes: Historical claims describe the 2007 implementation.
 
   - id: S0009
+    status: active
     title: "The Nix Build Farm: A Declarative Approach to Continuous Integration"
     creators:
       - Eelco Dolstra
@@ -174,6 +183,7 @@ sources:
     notes: Historical claims describe the 2008 build-farm implementation.
 
   - id: S0010
+    status: active
     title: Imposing a Memory Management Discipline on Software Deployment
     creators:
       - Eelco Dolstra
