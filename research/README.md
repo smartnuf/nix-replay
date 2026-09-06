@@ -46,6 +46,11 @@ remains available for provenance but should receive no new reliance. A
 superseded source points to another retained source record. Retirement or
 supersession does not remove existing dependent-claim impact checks.
 
+The source identity fields are `title`, `creators`, `published`, `kind`,
+`publisher`, and `version`. Once allocated, changing one requires a new source
+ID. Location, access, assessment, scope, rights, intended-use, and notes fields
+may change through the documented impact review.
+
 ## Claim records
 
 `claims.yaml` uses this schema:
@@ -62,6 +67,11 @@ supersession does not remove existing dependent-claim impact checks.
 - `caveats`: material limits that must travel with the statement.
 - `relevance`: likely use in the series; not a commitment to an episode.
 - `reviewed`: date last reviewed.
+
+The claim identity fields are `statement`, `kind`, and `attributed_to`.
+Changing the proposition, epistemic kind, or report attribution requires a new
+claim ID. Status, confidence, scope, evidence, caveats, relevance, and review
+date may change through reassessment.
 
 ### Source classes
 
@@ -111,6 +121,8 @@ not the unadopted proposition it contains.
    before any companion asset is published.
 7. A claim that Nix or NixOS lacks something remains a hypothesis until the
    relevant ecosystem has been searched.
+8. Do not add evidence links to a retired source. Existing links remain in
+   retained records for provenance and must be reassessed during retirement.
 
 ## Current slice
 

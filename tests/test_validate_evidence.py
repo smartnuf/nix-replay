@@ -282,6 +282,34 @@ class EvidenceValidatorTests(unittest.TestCase):
         )
         self.assert_has_error(errors, "inactive record S0001 must not change")
 
+    def test_active_source_identity_must_not_change(self) -> None:
+        previous = copy.deepcopy(VALID_SOURCE)
+        current = copy.deepcopy(previous)
+        current["title"] = "A different source"
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": previous},
+            {},
+            {"S0001": current},
+            {},
+            errors,
+        )
+        self.assert_has_error(errors, "source identity S0001")
+
+    def test_active_source_reassessment_metadata_can_change(self) -> None:
+        previous = copy.deepcopy(VALID_SOURCE)
+        current = copy.deepcopy(previous)
+        current["scope"] = "A narrower documented interface."
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": previous},
+            {},
+            {"S0001": current},
+            {},
+            errors,
+        )
+        self.assertEqual(errors, [])
+
     def test_retired_claim_record_must_not_change(self) -> None:
         previous = copy.deepcopy(VALID_CLAIM)
         previous["status"] = "retired"
@@ -296,6 +324,63 @@ class EvidenceValidatorTests(unittest.TestCase):
             errors,
         )
         self.assert_has_error(errors, "retired record C0001 must not change")
+
+    def test_active_claim_identity_must_not_change(self) -> None:
+        previous = copy.deepcopy(VALID_CLAIM)
+        current = copy.deepcopy(previous)
+        current["statement"] = "A different proposition."
+        errors: list[str] = []
+        _validate_identifier_history(
+            {},
+            {"C0001": previous},
+            {},
+            {"C0001": current},
+            errors,
+        )
+        self.assert_has_error(errors, "claim identity C0001")
+
+    def test_active_claim_reassessment_metadata_can_change(self) -> None:
+        previous = copy.deepcopy(VALID_CLAIM)
+        current = copy.deepcopy(previous)
+        current["confidence"] = "medium"
+        errors: list[str] = []
+        _validate_identifier_history(
+            {},
+            {"C0001": previous},
+            {},
+            {"C0001": current},
+            errors,
+        )
+        self.assertEqual(errors, [])
+
+    def test_new_evidence_link_to_retired_source_is_rejected(self) -> None:
+        source = copy.deepcopy(VALID_SOURCE)
+        source["status"] = "retired"
+        source["lifecycle_note"] = "No longer competent evidence."
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": source},
+            {},
+            {"S0001": copy.deepcopy(source)},
+            {"C0001": copy.deepcopy(VALID_CLAIM)},
+            errors,
+        )
+        self.assert_has_error(errors, "new evidence link to retired source")
+
+    def test_existing_retired_source_link_is_preserved(self) -> None:
+        source = copy.deepcopy(VALID_SOURCE)
+        source["status"] = "retired"
+        source["lifecycle_note"] = "No longer competent evidence."
+        claim = copy.deepcopy(VALID_CLAIM)
+        errors: list[str] = []
+        _validate_identifier_history(
+            {"S0001": source},
+            {"C0001": claim},
+            {"S0001": copy.deepcopy(source)},
+            {"C0001": copy.deepcopy(claim)},
+            errors,
+        )
+        self.assertEqual(errors, [])
 
 
 if __name__ == "__main__":

@@ -43,6 +43,15 @@ CLAIM_PREFIXES = {
     "hypothesis": "H",
     "judgement": "J",
 }
+SOURCE_IDENTITY_FIELDS = {
+    "creators",
+    "kind",
+    "published",
+    "publisher",
+    "title",
+    "version",
+}
+CLAIM_IDENTITY_FIELDS = {"attributed_to", "kind", "statement"}
 
 SOURCE_FIELDS = {
     "id",
@@ -640,6 +649,17 @@ def _validate_identifier_history(
                     f"research/sources.yaml: inactive record {identifier} "
                     "must not change"
                 )
+        else:
+            changed = sorted(
+                field
+                for field in SOURCE_IDENTITY_FIELDS
+                if current.get(field) != previous.get(field)
+            )
+            if changed:
+                errors.append(
+                    f"research/sources.yaml: source identity {identifier} "
+                    f"must not change fields: {', '.join(changed)}"
+                )
 
     for identifier, previous in previous_claims.items():
         current = current_claims.get(identifier)
@@ -653,6 +673,49 @@ def _validate_identifier_history(
                 f"research/claims.yaml: retired record {identifier} "
                 "must not change"
             )
+        else:
+            changed = sorted(
+                field
+                for field in CLAIM_IDENTITY_FIELDS
+                if current.get(field) != previous.get(field)
+            )
+            if changed:
+                errors.append(
+                    f"research/claims.yaml: claim identity {identifier} "
+                    f"must not change fields: {', '.join(changed)}"
+                )
+
+    previous_links = _evidence_links(previous_claims)
+    for link in sorted(_evidence_links(current_claims) - previous_links):
+        claim_id, source_id, locator, relation = link
+        source = current_sources.get(source_id)
+        if source and source.get("status") == "retired":
+            errors.append(
+                f"research/claims.yaml:{claim_id}: new evidence link to "
+                f"retired source {source_id} ({locator}; {relation})"
+            )
+
+
+def _evidence_links(
+    claims: dict[str, dict[str, Any]],
+) -> set[tuple[str, str, str, str]]:
+    links: set[tuple[str, str, str, str]] = set()
+    for claim_id, claim in claims.items():
+        evidence = claim.get("evidence")
+        if not isinstance(evidence, list):
+            continue
+        for item in evidence:
+            if not isinstance(item, dict):
+                continue
+            values = (
+                item.get("source"),
+                item.get("locator"),
+                item.get("relation"),
+            )
+            if all(isinstance(value, str) for value in values):
+                source, locator, relation = values
+                links.add((claim_id, source, locator, relation))
+    return links
 
 
 def validate_repository(

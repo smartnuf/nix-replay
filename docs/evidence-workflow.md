@@ -49,6 +49,10 @@ Specify version, date, platform, and configuration boundaries wherever they
 affect a technical observation. Decide which questions require semantic review
 rather than trying to encode them as mechanical rules.
 
+Allocate a new ID when a source's bibliographic identity or a claim's
+proposition, kind, or report attribution changes. Reassessment may change the
+non-identity fields documented in the evidence-record schema.
+
 ### 3. Execute in dependency order
 
 Register or update sources first, claims second, and derived views last. Carry
@@ -82,6 +86,8 @@ When adding, changing, superseding, or retiring a source:
   cite, or quote briefly;
 - identify every claim that cites it and reassess support, contrary evidence,
   confidence, scope, status, and caveats;
+- do not add an evidence link to a retired source; retain existing links only
+  for provenance and reassess them as part of retirement;
 - distinguish what the source establishes about its own date from what it can
   establish about current behaviour;
 - check the chronology for dates, precedence, influence, and turning points;
@@ -182,7 +188,7 @@ person, convention, or service.
 
 ## Pre-review checklist
 
-- Run `python3 tools/validate_evidence.py`.
+- Run `python3 tools/validate_evidence.py --baseline-ref <review-base>`.
 - Run `python3 -m unittest discover -s tests -v`.
 - Run `git diff --check` against the proposed review base.
 - Inspect all changed source and claim IDs and search for their dependants.
@@ -202,7 +208,9 @@ person, convention, or service.
 documented schemas: YAML shape, stable and unique identifiers, required fields,
 enums, report attribution, source references, rights fields, registered IDs
 used in research Markdown, lifecycle consistency, and retention of identifiers
-allocated in a supplied Git baseline.
+allocated in a supplied Git baseline. Baseline validation also preserves
+source and claim identity fields and rejects new evidence links to retired
+sources.
 
 The Markdown check covers `research/`, `experiments/`, `publishing/`, and
 `docs/research-synthesis.md`, matching the planned derived dossier views.
