@@ -1,0 +1,430 @@
+schema_version: 1
+updated: 2026-09-05
+claims:
+  - id: C0001
+    statement: >-
+      A 2004 LISA paper presented Nix as a software deployment system whose
+      principal mechanism was computing distinct component paths from
+      cryptographic hashes of build inputs.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Publication and design history established by the 2004 paper.
+    evidence:
+      - source: S0001
+        locator: "page 1, introduction and feature summary"
+        relation: supports
+      - source: S0004
+        locator: "2004 publication entry"
+        relation: supports
+    caveats:
+      - This establishes a public research milestone, not the date work began.
+      - Current Nix supports additional store-path methods and requires its own
+        technical account.
+    relevance: Origins of the deployment problem and the core architectural move.
+    reviewed: 2026-09-05
+
+  - id: C0002
+    statement: >-
+      Eelco Dolstra's doctoral thesis, published by Utrecht University on
+      18 January 2006, developed the purely functional deployment model and
+      described its implementation in Nix.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Publication history and the thesis's stated subject.
+    evidence:
+      - source: S0002
+        locator: "publication metadata and abstract"
+        relation: supports
+      - source: S0007
+        locator: "references entry"
+        relation: supports
+    caveats: []
+    relevance: The research lineage and the thesis's account of the model.
+    reviewed: 2026-09-05
+
+  - id: C0003
+    statement: >-
+      The 2008 NixOS paper applied the functional deployment model beyond
+      packages to static operating-system configuration built from a
+      declarative specification.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Contribution claimed and described by the 2008 paper.
+    evidence:
+      - source: S0003
+        locator: "page 1, abstract and contributions"
+        relation: supports
+      - source: S0004
+        locator: "2008 NixOS publication entry"
+        relation: supports
+    caveats:
+      - Static configuration is not the whole running system or its mutable data.
+    relevance: The bridge from package management to whole-system design.
+    reviewed: 2026-09-05
+
+  - id: C0004
+    statement: >-
+      In the model documented by the 2008 paper, Nix expressions describe a
+      graph of derivations; each derivation specifies a builder, environment,
+      and dependencies, and dependencies are built before the builder runs.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: "NixOS: A Purely Functional Linux Distribution (2008)"
+    scope: Conceptual model in the 2008 paper.
+    evidence:
+      - source: S0003
+        locator: "section 3, page 2"
+        relation: supports
+    caveats:
+      - Current Nix terminology and derivation features require versioned
+        manual confirmation before scripting.
+    relevance: Explains where declared process enters Nix and where freedom ends.
+    reviewed: 2026-09-05
+
+  - id: C0005
+    statement: >-
+      In Nix 2.35, store objects contain filesystem data and references to
+      other store objects, are immutable after creation, and must be present
+      with everything they reference.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: Nix 2.35.2 Reference Manual
+    scope: Nix 2.35 store model.
+    evidence:
+      - source: S0005
+        locator: "store/store-object: Store Object, Immutability, Closure property"
+        relation: supports
+    caveats:
+      - The set of objects present in a store can change over time.
+      - Store-path identity and content identity are not interchangeable terms.
+    relevance: Establishes the durable graph on which sharing and realisation rely.
+    reviewed: 2026-09-05
+
+  - id: C0006
+    statement: >-
+      Nix package upgrades can be atomic at the selected profile boundary
+      because packages in the store are not overwritten; a selection changes
+      to refer to a different set of store objects.
+    kind: report
+    status: supported
+    confidence: medium
+    attributed_to: Nix 2.35.2 Reference Manual
+    scope: Package profiles described by Nix 2.35.
+    evidence:
+      - source: S0005
+        locator: "manual introduction: Atomic upgrades and rollbacks"
+        relation: supports
+      - source: S0001
+        locator: "pages 4-5, user environments"
+        relation: historical-support
+    caveats:
+      - Atomicity here does not include arbitrary mutable data or external state.
+      - Package-profile rollback and NixOS system rollback are distinct operations.
+    relevance: A concrete checkpoint-and-selection mechanism, with a sharp boundary.
+    reviewed: 2026-09-05
+
+  - id: C0007
+    statement: >-
+      NixOS 26.05 combines modules into a full declarative configuration, builds
+      a new configuration before switching, and retains earlier system
+      generations until they are garbage-collected.
+    kind: report
+    status: supported
+    confidence: medium
+    attributed_to: NixOS 26.05 Manual
+    scope: NixOS 26.05 module, rebuild, and rollback interfaces.
+    evidence:
+      - source: S0006
+        locator: "Changing the Configuration"
+        relation: supports
+      - source: S0006
+        locator: "Writing NixOS Modules"
+        relation: supports
+      - source: S0006
+        locator: "Rolling Back Configuration Changes"
+        relation: supports
+    caveats:
+      - Switching attempts to realise the configuration in a running system;
+        activation has effects and is not merely evaluation.
+      - Earlier generations do not restore application databases or other
+        mutable state unless separately managed.
+    relevance: Shows composition, realisation, checkpoint selection, and limits.
+    reviewed: 2026-09-05
+
+  - id: C0008
+    statement: >-
+      The official publication record credits a wider group than a single
+      inventor: Dolstra, de Jonge, and Visser on the 2004 Nix paper; Dolstra
+      and Löh on the 2008 NixOS paper; and Dolstra, Löh, and Pierron on the
+      2010 journal version.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Authorship of the named publications, not total project contribution.
+    evidence:
+      - source: S0001
+        locator: "byline"
+        relation: supports
+      - source: S0003
+        locator: "byline"
+        relation: supports
+      - source: S0004
+        locator: "2008 and 2010 NixOS entries"
+        relation: supports
+    caveats:
+      - Publication authorship is not a complete history of community labour.
+    relevance: Prevents the people story from collapsing into a lone-founder story.
+    reviewed: 2026-09-05
+
+  - id: C0009
+    statement: >-
+      The official Nix research index describes the 2003 paper Integrating
+      Software Construction and Software Deployment as integrating building
+      and deployment in one formalism while preserving the creation and
+      deployment of variants through a simple functional build language.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: NixOS Research and Scientific Publications index
+    scope: The abstract and publication data recorded in the official index.
+    evidence:
+      - source: S0004
+        locator: "2003 publication entry and abstract"
+        relation: supports
+    caveats:
+      - This does not by itself establish its influence on Nix or the date at
+        which later Nix mechanisms were conceived.
+    relevance: Establishes the documented precursor problem without backdating Nix.
+    reviewed: 2026-09-05
+
+  - id: C0010
+    statement: >-
+      The 2007 paper presents static packages, configuration files, and control
+      scripts as immutable results of pure functions, and reports implementing
+      this model in a small but realistic distribution called NixOS.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: Purely Functional System Configuration Management (2007)
+    scope: The model and implementation described by the 2007 paper.
+    evidence:
+      - source: S0008
+        locator: "page 1, abstract; pages 1-2, introduction"
+        relation: supports
+    caveats:
+      - This reports the authors' description of the 2007 implementation and
+        does not establish present behaviour.
+    relevance: Marks the documented transition from deployment to NixOS.
+    reviewed: 2026-09-05
+
+  - id: C0011
+    statement: >-
+      The 2004 paper describes a user environment as a store object containing
+      links to a selected set of components, upgrade and rollback as switching
+      environments, and garbage collection as removing components unreachable
+      from retained user-environment roots using the dependency graph.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: "Nix: A Safe and Policy-Free System for Software Deployment"
+    scope: User environments and garbage collection in the 2004 system.
+    evidence:
+      - source: S0001
+        locator: "pages 4-5, User Environments"
+        relation: supports
+    caveats:
+      - These are separate cooperating mechanisms, not consequences of hashed
+        store paths alone.
+    relevance: Gives the causal account for selection, rollback, and collection.
+    reviewed: 2026-09-05
+
+  - id: C0012
+    statement: >-
+      The 2008 Nix Build Farm paper describes a continuous-integration tool
+      built on Nix whose functional build descriptions produce build
+      environments automatically and deterministically and express build
+      variants.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: "The Nix Build Farm (2008)"
+    scope: Build-farm design and use reported in the 2008 paper.
+    evidence:
+      - source: S0009
+        locator: "page 1, abstract; pages 2-3, introduction and build-farm model"
+        relation: supports
+    caveats:
+      - This reports the authors' account of the 2008 implementation and does
+        not establish current behaviour or a complete development process.
+    relevance: Documents an early use of Nix in development-process automation.
+    reviewed: 2026-09-05
+
+  - id: C0013
+    statement: >-
+      In Nix 2.35.2, realising a store path means ensuring that it is valid by
+      fetching a pre-built store object from a substituter, building the
+      corresponding derivation, or delegating the build to a remote machine
+      and retrieving its outputs.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: Nix 2.35.2 Reference Manual
+    scope: Realisation mechanisms documented by Nix 2.35.2.
+    evidence:
+      - source: S0005
+        locator: "glossary: derivation, purity, and realise/realisation entries"
+        relation: supports
+    caveats:
+      - The manual says equal derivations producing equal outputs is an
+        assumption that cannot be guaranteed in general; builders may use
+        external inputs such as the network or system time.
+      - The alternatives do not establish identical bytes or equal provenance
+        and trust for local, remote, and substituted outputs.
+    relevance: Supplies the current mechanism for the realisation boundary.
+    reviewed: 2026-09-05
+
+  - id: C0014
+    statement: >-
+      The 2004 memory-management paper compares software-deployment hazards
+      with pointer hazards and presents file-system closures plus a
+      memory-management discipline for dependency handling and safe collection.
+    kind: report
+    status: supported
+    confidence: high
+    attributed_to: >-
+      Imposing a Memory Management Discipline on Software Deployment (2004)
+    scope: Design argument and mechanisms reported in the 2004 paper.
+    evidence:
+      - source: S0010
+        locator: "pages 1 and 3-4, abstract and sections 3-5"
+        relation: supports
+    caveats:
+      - This records the authors' historical analogy and account, not current
+        Nix terminology or an independently reproduced result.
+    relevance: Records the second early explanation of closures and collection.
+    reviewed: 2026-09-05
+
+  - id: H0001
+    statement: >-
+      Nix supplies a strong realisation and selection substrate for a
+      replayable development process, but does not by itself represent the
+      evolving intent, decisions, assessment, and steering loop of that process.
+    kind: hypothesis
+    status: open
+    confidence: low
+    scope: Relationship between core Nix/NixOS and the proposed process model.
+    evidence:
+      - source: S0003
+        locator: "sections 3-5"
+        relation: motivates
+      - source: S0005
+        locator: "store model and command interfaces"
+        relation: motivates
+      - source: S0006
+        locator: "configuration, module, and rebuild interfaces"
+        relation: motivates
+    caveats:
+      - Must be tested against Nix ecosystem tools before becoming a gap claim.
+      - A composition of existing tools may already cover some proposed layers.
+    relevance: Candidate bridge from the Nix story to the series thesis.
+    reviewed: 2026-09-05
+
+  - id: H0002
+    statement: >-
+      Functional deployment does not remove impurity; it moves the decisive
+      questions to declared inputs, build isolation, activation effects,
+      mutable runtime state, external services, and observation of outcomes.
+    kind: inference
+    status: provisional
+    confidence: medium
+    scope: Boundary analysis of the documented Nix and NixOS models.
+    evidence:
+      - source: S0003
+        locator: "sections 3 and 6"
+        relation: motivates
+      - source: S0005
+        locator: "store/store-object note on intrinsic and extrinsic properties"
+        relation: supports
+      - source: S0006
+        locator: "Changing the Configuration and rollback sections"
+        relation: supports
+    caveats:
+      - Each boundary needs experiments and examples before use as a broad claim.
+    relevance: Locates the honest limits of reproducibility and replay.
+    reviewed: 2026-09-05
+
+  - id: H0003
+    statement: >-
+      A replayable process can permit bounded choice or randomness upstream
+      while requiring selected decisions, inputs, and outputs to become durable
+      enough for later inspection and increasingly controlled realisation.
+    kind: hypothesis
+    status: open
+    confidence: low
+    scope: Proposed series model; not a claim about existing Nix behaviour.
+    evidence: []
+    caveats:
+      - Needs vocabulary tests, worked examples, and comparison with adjacent tools.
+      - Replay must not be presented as synonymous with exact reproduction or tracing.
+    relevance: Central proposition to investigate after the Nix foundation is sound.
+    reviewed: 2026-09-05
+
+  - id: H0004
+    statement: >-
+      The 2003 construction-and-deployment work is an antecedent to the later
+      Nix deployment model.
+    kind: inference
+    status: provisional
+    confidence: low
+    scope: Relationship inferred from the official historical index.
+    evidence:
+      - source: S0004
+        locator: "2003 publication entry and its placement in the Nix index"
+        relation: motivates
+    caveats:
+      - This does not establish a direct line of influence, when Nix work began,
+        or that the current Nix architecture was present in 2003.
+    relevance: A question for the deeper origins and people investigation.
+    reviewed: 2026-09-05
+
+  - id: H0005
+    statement: >-
+      The 2008 Nix Build Farm work is an early documented bridge from Nix's
+      deployment model to development-process automation relevant to the
+      proposed replay model.
+    kind: inference
+    status: provisional
+    confidence: low
+    scope: Project interpretation of the 2008 build-farm paper.
+    evidence:
+      - source: S0009
+        locator: "pages 1-3, motivation and build-farm model"
+        relation: motivates
+    caveats:
+      - The paper does not describe the full replay model proposed by this
+        project or establish the capabilities of current systems.
+    relevance: Connects the historical account to a later question for testing.
+    reviewed: 2026-09-05
+
+  - id: H0006
+    statement: >-
+      The 2004 paper's memory-management analogy provides a useful second
+      explanatory route into closures and garbage collection for this series.
+    kind: hypothesis
+    status: provisional
+    confidence: low
+    scope: Proposed editorial interpretation of the 2004 paper.
+    evidence:
+      - source: S0010
+        locator: "pages 1 and 3-4, abstract and sections 3-5"
+        relation: motivates
+    caveats:
+      - Pedagogical usefulness remains to be tested in outline and script
+        review; the analogy is not a separate Nix mechanism.
+    relevance: Candidate historical and explanatory framing for later use.
+    reviewed: 2026-09-05
