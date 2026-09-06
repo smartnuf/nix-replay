@@ -116,6 +116,14 @@ class EvidenceValidatorTests(unittest.TestCase):
             self.errors(markdown="Mistyped source [S00001].\n"),
             "malformed identifier S00001",
         )
+        self.assert_has_error(
+            self.errors(markdown="Mistyped claim [C00O1].\n"),
+            "malformed identifier C00O1",
+        )
+        self.assert_has_error(
+            self.errors(markdown="Mistyped claim [C0001a].\n"),
+            "malformed identifier C0001a",
+        )
 
     def test_identifier_prefix_must_match_claim_kind(self) -> None:
         self.claims[0]["id"] = "H0001"
@@ -252,6 +260,19 @@ class EvidenceValidatorTests(unittest.TestCase):
         )
         self.assert_has_error(
             validate_repository(self.root), "duplicate key 'updated'"
+        )
+
+    def test_invalid_yaml_timestamp_is_reported(self) -> None:
+        self.write_fixture()
+        sources_path = self.root / "research" / "sources.yaml"
+        sources_path.write_text(
+            sources_path.read_text(encoding="utf-8").replace(
+                "updated: '2026-09-06'", "updated: 2026-02-30"
+            ),
+            encoding="utf-8",
+        )
+        self.assert_has_error(
+            validate_repository(self.root), "sources.yaml: invalid YAML"
         )
 
     def test_allocated_identifiers_must_remain_in_registers(self) -> None:

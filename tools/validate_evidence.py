@@ -17,6 +17,7 @@ import yaml
 SOURCE_ID = re.compile(r"^S\d{4}$")
 CLAIM_ID = re.compile(r"^[CHJ]\d{4}$")
 MARKDOWN_ID_CANDIDATE = re.compile(r"\b[SCHJ]\d+\b")
+MARKDOWN_BRACKETED_ID = re.compile(r"\[([SCHJ][^\]\s]*)\]")
 
 SOURCE_CLASSES = {
     "contemporary-primary",
@@ -139,7 +140,7 @@ def _display(path: Path, root: Path) -> str:
 def _parse_yaml(text: str, label: str, errors: list[str]) -> Any:
     try:
         return yaml.load(text, Loader=UniqueKeyLoader)
-    except yaml.YAMLError as exc:
+    except (ValueError, yaml.YAMLError) as exc:
         errors.append(f"{label}: invalid YAML: {exc}")
     return None
 
@@ -581,8 +582,18 @@ def _validate_markdown_ids(
             errors.append(f"{_display(path, root)}: cannot read file: {exc}")
             continue
         for line_number, line in enumerate(text.splitlines(), start=1):
+            bracketed = list(MARKDOWN_BRACKETED_ID.finditer(line))
+            candidates = [
+                (match.span(1), match.group(1)) for match in bracketed
+            ]
             for match in MARKDOWN_ID_CANDIDATE.finditer(line):
-                identifier = match.group()
+                if any(
+                    start <= match.start() and match.end() <= end
+                    for (start, end), _ in candidates
+                ):
+                    continue
+                candidates.append((match.span(), match.group()))
+            for _, identifier in candidates:
                 pattern = SOURCE_ID if identifier.startswith("S") else CLAIM_ID
                 if not pattern.fullmatch(identifier):
                     errors.append(
