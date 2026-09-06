@@ -61,16 +61,19 @@ class EvidenceValidatorTests(unittest.TestCase):
         (self.root / "research").mkdir()
         self.sources = [copy.deepcopy(VALID_SOURCE)]
         self.claims = [copy.deepcopy(VALID_CLAIM)]
+        self.source_schema_version: object = 2
+        self.claim_schema_version: object = 1
+        self.updated: object = "2026-09-06"
 
     def write_fixture(self, markdown: str = "[C0001] [S0001]\n") -> None:
         source_document = {
-            "schema_version": 2,
-            "updated": "2026-09-06",
+            "schema_version": self.source_schema_version,
+            "updated": self.updated,
             "sources": self.sources,
         }
         claim_document = {
-            "schema_version": 1,
-            "updated": "2026-09-06",
+            "schema_version": self.claim_schema_version,
+            "updated": self.updated,
             "claims": self.claims,
         }
         (self.root / "research" / "sources.yaml").write_text(
@@ -104,6 +107,16 @@ class EvidenceValidatorTests(unittest.TestCase):
         self.claims[0]["id"] = "C12"
         self.assert_has_error(self.errors(markdown=""), "four digits")
 
+    def test_malformed_markdown_identifier_is_rejected(self) -> None:
+        self.assert_has_error(
+            self.errors(markdown="Mistyped claim [C001].\n"),
+            "malformed identifier C001",
+        )
+        self.assert_has_error(
+            self.errors(markdown="Mistyped source [S00001].\n"),
+            "malformed identifier S00001",
+        )
+
     def test_identifier_prefix_must_match_claim_kind(self) -> None:
         self.claims[0]["id"] = "H0001"
         self.assert_has_error(
@@ -114,6 +127,17 @@ class EvidenceValidatorTests(unittest.TestCase):
     def test_documented_enum_is_enforced(self) -> None:
         self.claims[0]["confidence"] = "absolute"
         self.assert_has_error(self.errors(), ".confidence: expected one of")
+
+    def test_schema_version_requires_an_integer(self) -> None:
+        self.source_schema_version = 2.0
+        self.claim_schema_version = True
+        errors = self.errors()
+        self.assert_has_error(errors, "sources.yaml.schema_version")
+        self.assert_has_error(errors, "claims.yaml.schema_version")
+
+    def test_register_update_requires_a_real_date(self) -> None:
+        self.updated = "2026-02-30"
+        self.assert_has_error(self.errors(), ".updated: expected an ISO")
 
     def test_required_source_field_is_enforced(self) -> None:
         del self.sources[0]["rights_status"]
@@ -167,9 +191,27 @@ class EvidenceValidatorTests(unittest.TestCase):
             self.errors(), ".intended_use: must not be blank"
         )
 
+    def test_source_access_requires_a_real_date(self) -> None:
+        self.sources[0]["accessed"] = True
+        self.assert_has_error(self.errors(), ".accessed: expected an ISO")
+
     def test_report_requires_attribution(self) -> None:
         del self.claims[0]["attributed_to"]
         self.assert_has_error(self.errors(), ".attributed_to: expected")
+
+    def test_supported_claim_requires_evidence(self) -> None:
+        self.claims[0]["evidence"] = []
+        self.assert_has_error(
+            self.errors(), "supported claims require evidence"
+        )
+
+    def test_evidence_relation_enum_is_enforced(self) -> None:
+        self.claims[0]["evidence"][0]["relation"] = "suports"
+        self.assert_has_error(self.errors(), ".relation: expected one of")
+
+    def test_claim_review_requires_a_real_date(self) -> None:
+        self.claims[0]["reviewed"] = 2026
+        self.assert_has_error(self.errors(), ".reviewed: expected an ISO")
 
     def test_unknown_evidence_source_is_rejected(self) -> None:
         self.claims[0]["evidence"][0]["source"] = "S9999"
@@ -186,6 +228,20 @@ class EvidenceValidatorTests(unittest.TestCase):
             self.errors(markdown="Unsupported statement [H9999].\n"),
             "unknown identifier H9999",
         )
+
+    def test_planned_derived_view_paths_are_scanned(self) -> None:
+        self.write_fixture()
+        derived_paths = (
+            self.root / "docs" / "research-synthesis.md",
+            self.root / "experiments" / "result.md",
+            self.root / "publishing" / "rights.md",
+        )
+        for path in derived_paths:
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text("Unknown claim [C9999].\n", encoding="utf-8")
+        errors = validate_repository(self.root)
+        for path in derived_paths:
+            self.assert_has_error(errors, str(path.relative_to(self.root)))
 
     def test_duplicate_yaml_mapping_key_is_rejected(self) -> None:
         self.write_fixture()

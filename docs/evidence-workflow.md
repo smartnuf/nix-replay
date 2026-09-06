@@ -204,6 +204,9 @@ enums, report attribution, source references, rights fields, registered IDs
 used in research Markdown, lifecycle consistency, and retention of identifiers
 allocated in a supplied Git baseline.
 
+The Markdown check covers `research/`, `experiments/`, `publishing/`, and
+`docs/research-synthesis.md`, matching the planned derived dossier views.
+
 Passing validation does not establish that a source is adequate, a claim fits
 the source's scope, an attribution is causal, a contribution ranking is fair,
 or a proposition has the correct epistemic kind. Those are semantic review

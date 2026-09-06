@@ -16,7 +16,7 @@ import yaml
 
 SOURCE_ID = re.compile(r"^S\d{4}$")
 CLAIM_ID = re.compile(r"^[CHJ]\d{4}$")
-MARKDOWN_ID = re.compile(r"\b[SCHJ]\d{4}\b")
+MARKDOWN_ID_CANDIDATE = re.compile(r"\b[SCHJ]\d+\b")
 
 SOURCE_CLASSES = {
     "contemporary-primary",
@@ -30,6 +30,12 @@ SOURCE_STATUSES = {"active", "retired", "superseded"}
 CLAIM_KINDS = {"fact", "report", "inference", "hypothesis", "judgement"}
 CLAIM_STATUSES = {"supported", "provisional", "open", "contested", "retired"}
 CONFIDENCES = {"high", "medium", "low"}
+EVIDENCE_RELATIONS = {
+    "contradicts",
+    "historical-support",
+    "motivates",
+    "supports",
+}
 CLAIM_PREFIXES = {
     "fact": "C",
     "report": "C",
@@ -187,6 +193,20 @@ def _is_blank(value: Any) -> bool:
     return value is None or isinstance(value, str) and not value.strip()
 
 
+def _check_date(value: Any, location: str, errors: list[str]) -> None:
+    if type(value) is dt.date:
+        return
+    if isinstance(value, str):
+        try:
+            parsed = dt.date.fromisoformat(value)
+        except ValueError:
+            pass
+        else:
+            if parsed.isoformat() == value:
+                return
+    errors.append(f"{location}: expected an ISO calendar date (YYYY-MM-DD)")
+
+
 def _check_fields(
     record: dict[str, Any],
     required: set[str],
@@ -226,15 +246,12 @@ def _check_root(
         errors,
     )
     expected_version = SCHEMA_VERSIONS[filename]
-    if document.get("schema_version") != expected_version:
+    version = document.get("schema_version")
+    if type(version) is not int or version != expected_version:
         errors.append(
-            f"{location}.schema_version: expected {expected_version}"
+            f"{location}.schema_version: expected integer {expected_version}"
         )
-    updated = document.get("updated")
-    if not isinstance(updated, (str, dt.date)) or _is_blank(updated):
-        errors.append(
-            f"{location}.updated: expected a date or non-empty string"
-        )
+    _check_date(document.get("updated"), f"{location}.updated", errors)
     records = document.get(collection)
     if not isinstance(records, list):
         errors.append(f"{location}.{collection}: expected a list")
@@ -317,13 +334,17 @@ def _validate_sources(
                 f"{location}.status: expected one of "
                 f"{', '.join(sorted(SOURCE_STATUSES))}"
             )
-        for name in ("published", "accessed"):
-            value = record.get(name)
-            if not isinstance(value, (str, int, dt.date)) or _is_blank(value):
-                errors.append(
-                    f"{location}.{name}: expected a date, year, or non-empty "
-                    "string"
-                )
+        published = record.get("published")
+        if (
+            isinstance(published, bool)
+            or not isinstance(published, (str, int, dt.date))
+            or _is_blank(published)
+        ):
+            errors.append(
+                f"{location}.published: expected a date, year, or non-empty "
+                "string"
+            )
+        _check_date(record.get("accessed"), f"{location}.accessed", errors)
         if "snapshot_url" in record:
             _check_non_empty_string(
                 record["snapshot_url"], f"{location}.snapshot_url", errors
@@ -490,6 +511,10 @@ def _validate_claims(
         if not isinstance(evidence, list):
             errors.append(f"{location}.evidence: expected a list")
         else:
+            if record.get("status") == "supported" and not evidence:
+                errors.append(
+                    f"{location}.evidence: supported claims require evidence"
+                )
             for evidence_index, item in enumerate(evidence):
                 item_location = f"{location}.evidence[{evidence_index}]"
                 if not isinstance(item, dict):
@@ -512,37 +537,50 @@ def _validate_claims(
                         f"{item_location}.source: unknown source identifier "
                         f"{source}"
                     )
+                if item.get("relation") not in EVIDENCE_RELATIONS:
+                    errors.append(
+                        f"{item_location}.relation: expected one of "
+                        f"{', '.join(sorted(EVIDENCE_RELATIONS))}"
+                    )
 
         _check_string_list(
             record.get("caveats"), f"{location}.caveats", errors
         )
-        reviewed = record.get("reviewed")
-        if not isinstance(reviewed, (str, dt.date)) or _is_blank(reviewed):
-            errors.append(
-                f"{location}.reviewed: expected a date or non-empty string"
-            )
+        _check_date(record.get("reviewed"), f"{location}.reviewed", errors)
     return registered
 
 
 def _validate_markdown_ids(
-    research_dir: Path,
     root: Path,
     source_ids: set[str],
     claim_ids: set[str],
     errors: list[str],
 ) -> None:
-    if not research_dir.is_dir():
-        errors.append("research: directory does not exist")
-        return
-    for path in sorted(research_dir.rglob("*.md")):
+    paths: set[Path] = set()
+    for relative_directory in ("research", "experiments", "publishing"):
+        directory = root / relative_directory
+        if directory.is_dir():
+            paths.update(directory.rglob("*.md"))
+    synthesis = root / "docs" / "research-synthesis.md"
+    if synthesis.is_file():
+        paths.add(synthesis)
+
+    for path in sorted(paths):
         try:
             text = path.read_text(encoding="utf-8")
         except OSError as exc:
             errors.append(f"{_display(path, root)}: cannot read file: {exc}")
             continue
         for line_number, line in enumerate(text.splitlines(), start=1):
-            for match in MARKDOWN_ID.finditer(line):
+            for match in MARKDOWN_ID_CANDIDATE.finditer(line):
                 identifier = match.group()
+                pattern = SOURCE_ID if identifier.startswith("S") else CLAIM_ID
+                if not pattern.fullmatch(identifier):
+                    errors.append(
+                        f"{_display(path, root)}:{line_number}: malformed "
+                        f"identifier {identifier}"
+                    )
+                    continue
                 known = source_ids if identifier.startswith("S") else claim_ids
                 if identifier not in known:
                     errors.append(
@@ -636,7 +674,7 @@ def validate_repository(
     sources = _validate_sources(source_records, errors)
     claims = _validate_claims(claim_records, set(sources), errors)
     _validate_markdown_ids(
-        research_dir, root, set(sources), set(claims), errors
+        root, set(sources), set(claims), errors
     )
 
     if baseline_ref:

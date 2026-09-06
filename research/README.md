@@ -57,7 +57,8 @@ supersession does not remove existing dependent-claim impact checks.
 - `confidence`: `high`, `medium`, or `low` evidential confidence.
 - `scope`: boundary within which the statement is intended to hold.
 - `attributed_to`: required for a `report`; omitted for other kinds.
-- `evidence`: source IDs, locators, and the relation to the statement.
+- `evidence`: source IDs, locators, and the relation to the statement. Relation
+  is `supports`, `contradicts`, `motivates`, or `historical-support`.
 - `caveats`: material limits that must travel with the statement.
 - `relevance`: likely use in the series; not a commitment to an episode.
 - `reviewed`: date last reviewed.
