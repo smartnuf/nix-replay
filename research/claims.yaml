@@ -415,7 +415,7 @@ claims:
     statement: >-
       The 2004 paper's memory-management analogy provides a useful second
       explanatory route into closures and garbage collection for this series.
-    kind: inference
+    kind: hypothesis
     status: provisional
     confidence: low
     scope: Proposed editorial interpretation of the 2004 paper.
