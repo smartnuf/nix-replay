@@ -24,6 +24,8 @@ until the applicable review and authority boundary is explicitly satisfied.
 
 ## Working rules
 
+- Follow the detailed [evidence workflow](docs/evidence-workflow.md) for every
+  source, claim, or derived-research change.
 - Preserve the distinction between fact, report, inference, hypothesis, and
   project judgement.
 - Prefer primary and authoritative sources for research.
@@ -39,6 +41,18 @@ until the applicable review and authority boundary is explicitly satisfied.
   silent product or editorial decisions.
 - Use durable repository records for accepted intent, evidence, decisions, and
   results. Do not treat a conversation transcript as authoritative state.
+- Route material statements in derived research prose through registered claim
+  IDs rather than bypassing classification with source-only citations.
+- Do not let a claim exceed the recorded scope of its evidence. Keep historical
+  accounts distinct from versioned descriptions of current behaviour.
+- Credit only evidenced roles. Record rankings or evaluations as explicit
+  project judgements.
+- In boundary models, distinguish durable descriptions and objects, execution,
+  realised results, selected state, and contingent live state.
+- When a source or claim changes, check its dependent claims, chronology,
+  people map, concepts, derived prose, and rights records.
+- Treat review convergence as applying only to the exact reviewed head. Review
+  does not itself advance a project gate.
 
 ## Human-reserved decisions
 

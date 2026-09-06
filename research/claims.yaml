@@ -1,5 +1,5 @@
 schema_version: 1
-updated: 2026-09-05
+updated: 2026-09-06
 claims:
   - id: C0001
     statement: >-
@@ -308,6 +308,52 @@ claims:
         Nix terminology or an independently reproduced result.
     relevance: Records the second early explanation of closures and collection.
     reviewed: 2026-09-05
+
+  - id: C0015
+    statement: >-
+      The retained publication bylines credit Eelco Dolstra and Armijn Hemel
+      for the 2007 system-configuration paper; Dolstra and Eelco Visser for the
+      2008 Nix Build Farm paper; and Dolstra, Visser, and Merijn de Jonge for
+      the 2004 memory-management paper.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Authorship of the three named publications.
+    evidence:
+      - source: S0008
+        locator: byline
+        relation: supports
+      - source: S0009
+        locator: byline
+        relation: supports
+      - source: S0010
+        locator: byline
+        relation: supports
+    caveats:
+      - Publication authorship does not rank contribution or represent every
+        kind of project work.
+    relevance: Completes the publication roles used in the initial people map.
+    reviewed: 2026-09-06
+
+  - id: C0016
+    statement: >-
+      Nix 2.35.2 citation metadata credits Eelco Dolstra and Nix contributors,
+      while the NixOS 26.05 manual is credited to NixOS contributors.
+    kind: fact
+    status: supported
+    confidence: high
+    scope: Attribution in the named current project records.
+    evidence:
+      - source: S0007
+        locator: preferred citation and author entries
+        relation: supports
+      - source: S0006
+        locator: manual attribution
+        relation: supports
+    caveats:
+      - Collective project credit does not identify or rank individual work.
+    relevance: Current collective roles used in the initial people map.
+    reviewed: 2026-09-06
 
   - id: H0001
     statement: >-

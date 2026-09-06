@@ -75,7 +75,7 @@ The current evidence baseline uses the versioned Nix 2.35.2 manual for the
 store model and the NixOS 26.05 manual for modules, rebuilds, generations, and
 rollback. These manuals tell us about present documented interfaces; they must
 not be read backwards as evidence that every feature existed in early Nix.
-[S0005, S0006]
+[C0005, C0007, C0013]
 
 ## Questions for the next history slice
 

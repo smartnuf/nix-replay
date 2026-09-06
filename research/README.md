@@ -12,13 +12,15 @@ have the same epistemic status.
 - `H####` identifies an inference or hypothesis to test.
 - `J####` identifies a project judgement or recommendation.
 
-Identifiers are stable. Retire a record rather than reusing its identifier.
+Identifiers are stable. Registers retain allocated records: retire or
+supersede a record in place rather than deleting it or reusing its identifier.
 
 ## Source records
 
-`sources.yaml` uses this schema:
+`sources.yaml` uses schema version 2:
 
 - `id`: stable source identifier.
+- `status`: `active`, `retired`, or `superseded`.
 - `title`: title as published.
 - `creators`: credited authors or responsible organisation.
 - `published`: publication date or year, as precisely as established.
@@ -35,6 +37,21 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
   from permission to read, cite, and make short attributed quotations.
 - `intended_use`: planned use under assessment, independently of rights status.
 - `notes`: cautions about interpretation or currency.
+- `superseded_by`: replacement source ID, required only for `superseded`.
+- `lifecycle_note`: reason for retirement or supersession, required for
+  `retired` and `superseded`.
+
+An active source omits `superseded_by` and `lifecycle_note`. A retired source
+remains available for provenance but should receive no new reliance. A
+superseded source points to another retained source record. The target may
+later be retired; the link remains as historical lifecycle provenance rather
+than implying that the target is still competent evidence. Retirement or
+supersession does not remove existing dependent-claim impact checks.
+
+The source identity fields are `title`, `creators`, `published`, `kind`,
+`publisher`, and `version`. Once allocated, changing one requires a new source
+ID. Location, access, assessment, scope, rights, intended-use, and notes fields
+may change through the documented impact review.
 
 ## Claim records
 
@@ -47,10 +64,20 @@ Identifiers are stable. Retire a record rather than reusing its identifier.
 - `confidence`: `high`, `medium`, or `low` evidential confidence.
 - `scope`: boundary within which the statement is intended to hold.
 - `attributed_to`: required for a `report`; omitted for other kinds.
-- `evidence`: source IDs, locators, and the relation to the statement.
+- `evidence`: source IDs, locators, and the relation to the statement. Relation
+  is `supports`, `contradicts`, `motivates`, or `historical-support`.
 - `caveats`: material limits that must travel with the statement.
 - `relevance`: likely use in the series; not a commitment to an episode.
 - `reviewed`: date last reviewed.
+
+The claim identity fields are `statement`, `kind`, and `attributed_to`.
+Changing the proposition, epistemic kind, or report attribution requires a new
+claim ID. Status, confidence, scope, evidence, caveats, relevance, and review
+date may change through reassessment.
+
+A claim with `status: supported` requires at least one `supports` or
+`historical-support` evidence relation. Contradicting or motivating evidence
+may accompany it but cannot alone justify supported status.
 
 ### Source classes
 
@@ -100,6 +127,8 @@ not the unadopted proposition it contains.
    before any companion asset is published.
 7. A claim that Nix or NixOS lacks something remains a hypothesis until the
    relevant ecosystem has been searched.
+8. Do not add evidence links to a retired source. Existing links remain in
+   retained records for provenance and must be reassessed during retirement.
 
 ## Current slice
 
