@@ -16,7 +16,9 @@ sources:
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Original Nix research paper by its named authors.
-    scope: Early design, motivation, store identity, environments, and rollback.
+    scope: >-
+      Publication attribution, early design, motivation, store identity,
+      environments, and rollback.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: Claims are historical and describe the 2004 implementation.
@@ -53,7 +55,9 @@ sources:
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Original NixOS research paper by its named authors.
-    scope: NixOS design, derivations, declarative system construction, and limits.
+    scope: >-
+      Publication attribution, NixOS design, derivations, declarative system
+      construction, and limits.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: Describes the 2008 system; current behaviour needs current manuals.
@@ -116,7 +120,9 @@ sources:
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Official manual for the named NixOS release.
-    scope: Modules, system realisation, activation, generations, and rollback.
+    scope: >-
+      Manual attribution, modules, system realisation, activation, generations,
+      and rollback.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: >-
@@ -156,7 +162,9 @@ sources:
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Original system-configuration paper by its named authors.
-    scope: Early NixOS model, mechanisms, evaluation, and acknowledged limits.
+    scope: >-
+      Publication attribution, early NixOS model, mechanisms, evaluation, and
+      acknowledged limits.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: Historical claims describe the 2007 implementation.
@@ -177,7 +185,9 @@ sources:
     accessed: 2026-09-05
     source_class: contemporary-primary
     authority: Original Nix build-farm paper by its named authors.
-    scope: Build-environment management, variability, and continuous integration.
+    scope: >-
+      Publication attribution, build-environment management, variability, and
+      continuous integration.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: Historical claims describe the 2008 build-farm implementation.
@@ -199,8 +209,8 @@ sources:
     source_class: contemporary-primary
     authority: Original deployment-discipline paper by its named authors.
     scope: >-
-      Memory-management analogy, dependency detection, closures, component
-      identity, and garbage collection in the 2004 design.
+      Publication attribution, memory-management analogy, dependency detection,
+      closures, component identity, and garbage collection in the 2004 design.
     rights_status: not-assessed-for-republication
     intended_use: citation-and-short-attributed-quotation
     notes: Historical claims describe the 2004 design and implementation.

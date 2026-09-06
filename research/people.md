@@ -5,16 +5,16 @@ biographical narrative or a ranking of contribution. Publication authorship,
 software authorship, maintenance, governance, documentation, support, and
 community-building are different kinds of credit.
 
-| Person or group | Verified role in this slice | Sources |
+| Person or group | Verified role in this slice | Claims |
 | --- | --- | --- |
-| Eelco Dolstra | Author of the 2006 thesis; co-author of the 2004 Nix and memory-management papers and the 2008/2010 NixOS papers | S0001-S0004, S0007, S0010 |
-| Merijn de Jonge | Co-author of the 2004 LISA Nix and memory-management papers | S0001, S0004, S0010 |
-| Eelco Visser | Co-author of the 2004 LISA Nix and memory-management papers and the 2008 Nix Build Farm paper | S0001, S0004, S0009-S0010 |
-| Armijn Hemel | Co-author of the 2007 system-configuration paper | S0004, S0008 |
-| Andres Löh | Co-author of the 2008 and 2010 NixOS papers | S0003, S0004 |
-| Nicolas Pierron | Co-author of the 2010 journal NixOS paper | S0004 |
-| Nix contributors | Collectively credited by current Nix citation metadata | S0007 |
-| NixOS contributors | Responsible group named for the current NixOS manual | S0006 |
+| Eelco Dolstra | Author of the 2006 thesis; co-author of the 2004 Nix and memory-management papers, the 2007 system-configuration paper, the 2008 Nix Build Farm paper, and the 2008/2010 NixOS papers | C0002, C0008, C0015 |
+| Merijn de Jonge | Co-author of the 2004 LISA Nix and memory-management papers | C0008, C0015 |
+| Eelco Visser | Co-author of the 2004 LISA Nix and memory-management papers and the 2008 Nix Build Farm paper | C0008, C0015 |
+| Armijn Hemel | Co-author of the 2007 system-configuration paper | C0015 |
+| Andres Löh | Co-author of the 2008 and 2010 NixOS papers | C0008 |
+| Nicolas Pierron | Co-author of the 2010 journal NixOS paper | C0008 |
+| Nix contributors | Collectively credited by current Nix citation metadata | C0016 |
+| NixOS contributors | Responsible group named for the current NixOS manual | C0016 |
 
 ## Editorial safeguards
 
