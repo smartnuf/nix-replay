@@ -175,6 +175,17 @@ class EvidenceValidatorTests(unittest.TestCase):
         self.sources[0]["lifecycle_note"] = "Replaced by a current edition."
         self.assertEqual(self.errors(), [])
 
+    def test_supersession_chain_may_end_at_a_retired_source(self) -> None:
+        second = copy.deepcopy(VALID_SOURCE)
+        second["id"] = "S0002"
+        second["status"] = "retired"
+        second["lifecycle_note"] = "No longer competent evidence."
+        self.sources.append(second)
+        self.sources[0]["status"] = "superseded"
+        self.sources[0]["superseded_by"] = "S0002"
+        self.sources[0]["lifecycle_note"] = "Replaced by the later source."
+        self.assertEqual(self.errors(), [])
+
     def test_supersession_target_must_exist(self) -> None:
         self.sources[0]["status"] = "superseded"
         self.sources[0]["superseded_by"] = "S0002"

@@ -43,7 +43,9 @@ supersede a record in place rather than deleting it or reusing its identifier.
 
 An active source omits `superseded_by` and `lifecycle_note`. A retired source
 remains available for provenance but should receive no new reliance. A
-superseded source points to another retained source record. Retirement or
+superseded source points to another retained source record. The target may
+later be retired; the link remains as historical lifecycle provenance rather
+than implying that the target is still competent evidence. Retirement or
 supersession does not remove existing dependent-claim impact checks.
 
 The source identity fields are `title`, `creators`, `published`, `kind`,

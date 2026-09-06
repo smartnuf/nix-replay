@@ -416,10 +416,6 @@ def _validate_source_lifecycle(
             errors.append(
                 f"{location}.superseded_by: unknown source identifier {target}"
             )
-        elif records[target].get("status") == "retired":
-            errors.append(
-                f"{location}.superseded_by: target {target} is retired"
-            )
 
     reported_cycles: set[frozenset[str]] = set()
     for start in records:

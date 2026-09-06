@@ -100,6 +100,8 @@ When adding, changing, superseding, or retiring a source:
   material needs a separate rights record or assessment.
 - retain retired and superseded records in the register; record their lifecycle
   state, reason, and replacement where applicable rather than deleting them.
+- preserve an existing supersession link when its target is later retired; the
+  link records historical replacement and does not make the target active.
 
 ## Claim-impact checklist
 
