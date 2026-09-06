@@ -213,6 +213,23 @@ class EvidenceValidatorTests(unittest.TestCase):
             self.errors(), "supported claims require evidence"
         )
 
+    def test_supported_claim_requires_a_supporting_relation(self) -> None:
+        self.claims[0]["evidence"][0]["relation"] = "contradicts"
+        self.claims[0]["evidence"].append(
+            {
+                "source": "S0001",
+                "locator": "research question",
+                "relation": "motivates",
+            }
+        )
+        self.assert_has_error(
+            self.errors(), "require at least one supporting evidence relation"
+        )
+
+    def test_historical_support_can_support_a_claim(self) -> None:
+        self.claims[0]["evidence"][0]["relation"] = "historical-support"
+        self.assertEqual(self.errors(), [])
+
     def test_evidence_relation_enum_is_enforced(self) -> None:
         self.claims[0]["evidence"][0]["relation"] = "suports"
         self.assert_has_error(self.errors(), ".relation: expected one of")

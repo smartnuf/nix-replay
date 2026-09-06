@@ -206,11 +206,11 @@ person, convention, or service.
 
 `tools/validate_evidence.py` checks the mechanically decidable parts of the
 documented schemas: YAML shape, stable and unique identifiers, required fields,
-enums, report attribution, source references, rights fields, registered IDs
-used in research Markdown, lifecycle consistency, and retention of identifiers
-allocated in a supplied Git baseline. Baseline validation also preserves
-source and claim identity fields and rejects new evidence links to retired
-sources.
+enums, report attribution, source references, minimum support relations for
+supported claims, rights fields, registered IDs used in research Markdown,
+lifecycle consistency, and retention of identifiers allocated in a supplied
+Git baseline. Baseline validation also preserves source and claim identity
+fields and rejects new evidence links to retired sources.
 
 The Markdown check covers `research/`, `experiments/`, `publishing/`, and
 `docs/research-synthesis.md`, matching the planned derived dossier views.

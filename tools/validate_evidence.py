@@ -37,6 +37,7 @@ EVIDENCE_RELATIONS = {
     "motivates",
     "supports",
 }
+SUPPORTING_EVIDENCE_RELATIONS = {"historical-support", "supports"}
 CLAIM_PREFIXES = {
     "fact": "C",
     "report": "C",
@@ -524,6 +525,15 @@ def _validate_claims(
             if record.get("status") == "supported" and not evidence:
                 errors.append(
                     f"{location}.evidence: supported claims require evidence"
+                )
+            elif record.get("status") == "supported" and not any(
+                isinstance(item, dict)
+                and item.get("relation") in SUPPORTING_EVIDENCE_RELATIONS
+                for item in evidence
+            ):
+                errors.append(
+                    f"{location}.evidence: supported claims require at least "
+                    "one supporting evidence relation"
                 )
             for evidence_index, item in enumerate(evidence):
                 item_location = f"{location}.evidence[{evidence_index}]"

@@ -73,6 +73,10 @@ Changing the proposition, epistemic kind, or report attribution requires a new
 claim ID. Status, confidence, scope, evidence, caveats, relevance, and review
 date may change through reassessment.
 
+A claim with `status: supported` requires at least one `supports` or
+`historical-support` evidence relation. Contradicting or motivating evidence
+may accompany it but cannot alone justify supported status.
+
 ### Source classes
 
 The machine-readable values preserve the six ordered classes in D1:
